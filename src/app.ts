@@ -5,11 +5,13 @@ import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
+import * as Sentry from '@sentry/node';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
+import sentryMiddleware from '@/middlewares/sentry.middleware';
 import { logger, stream } from '@utils/logger';
 
 class App {
@@ -22,6 +24,7 @@ class App {
     this.env = NODE_ENV || 'development';
     this.port = PORT || 3000;
 
+    this.initializeSentry();
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
     this.initializeSwagger();
@@ -76,6 +79,12 @@ class App {
 
   private initializeErrorHandling() {
     this.app.use(errorMiddleware);
+  }
+
+  private initializeSentry() {
+    sentryMiddleware(this);
+    this.app.use(Sentry.Handlers.requestHandler());
+    this.app.use(Sentry.Handlers.tracingHandler());
   }
 }
 

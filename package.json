@@ -1,7 +1,7 @@
 {
   "name": "lor_deck_tracker",
   "version": "0.0.0",
-  "description": "TypeScript + Prisma + MySQL + Express API Server",
+  "description": "Legends of Runterra Deck and history Tracker",
   "author": "",
   "license": "ISC",
   "scripts": {
@@ -23,6 +23,8 @@
   },
   "dependencies": {
     "@prisma/client": "^4.1.0",
+    "@sentry/node": "^7.28.1",
+    "@sentry/tracing": "^7.28.1",
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
