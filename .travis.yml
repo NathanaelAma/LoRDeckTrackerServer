@@ -2,6 +2,6 @@ language: node_js
 dist: trusty
 os: linux
 node_js:
-- lts/*
+- 16
 before_install:
   - npm i -g npm@latest
