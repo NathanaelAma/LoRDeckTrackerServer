@@ -5,10 +5,12 @@ import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
+import { connect, set } from 'mongoose';
 import * as Sentry from '@sentry/node';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
+import { dbConnection } from '@database';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import sentryMiddleware from '@/middlewares/sentry.middleware';
@@ -42,6 +44,14 @@ class App {
 
   public getServer() {
     return this.app;
+  }
+
+  private connectToDatabase() {
+    if (this.env !== 'production') {
+      set('debug', true);
+    }
+
+    connect(dbConnection.url, dbConnection.options as any);
   }
 
   private initializeMiddlewares() {

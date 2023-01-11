@@ -1,8 +1,8 @@
 import { Request } from 'express';
-import { User } from '@prisma/client';
+import { User } from '@interfaces/users.interface';
 
 export interface DataStoredInToken {
-  id: number;
+  _id: string;
 }
 
 export interface TokenData {
