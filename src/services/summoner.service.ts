@@ -13,6 +13,7 @@ class SummonerService {
 
   public async getSummonerByName(summonerName: string, region: LeagueRegion): Promise<any> {
     if (isEmpty(summonerName)) throw new HttpException(400, 'summonerName is empty');
+    if (isEmpty(region)) throw new HttpException(400, 'region is empty');
 
     const summoner: dto.SummonerDTO = await this.galeforce.lol.summoner().name(summonerName).region(region).exec();
     return summoner;
@@ -20,6 +21,7 @@ class SummonerService {
 
   public async getSummonerByPuuid(puuid: string, region: LeagueRegion): Promise<any> {
     if (isEmpty(puuid)) throw new HttpException(400, 'puuid is empty');
+    if (isEmpty(region)) throw new HttpException(400, 'region is empty');
 
     const summoner: dto.SummonerDTO = await this.galeforce.lol.summoner().puuid(puuid).region(region).exec();
     return summoner;
