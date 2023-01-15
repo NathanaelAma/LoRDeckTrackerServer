@@ -7,7 +7,7 @@ class SummonerController {
 
   public index = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      res.status(200).json({ data: 'Hello World', message: 'SummonerController' });
+      await res.status(200).json({ data: 'Hello World', message: 'SummonerController' });
     } catch (error) {
       next(error);
     }
