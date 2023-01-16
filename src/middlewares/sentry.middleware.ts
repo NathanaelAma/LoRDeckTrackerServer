@@ -1,7 +1,7 @@
 import App from '@/app';
 import { NODE_ENV, SENTRY_DSN } from '@/config';
-import Sentry from '@sentry/node';
-import Tracing from '@sentry/tracing';
+import * as Sentry from '@sentry/node';
+import * as Tracing from '@sentry/tracing';
 import { BrowserTracing } from '@sentry/tracing';
 
 const sentryMiddleware = (app: App) => {
