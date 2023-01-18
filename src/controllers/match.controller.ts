@@ -1,7 +1,7 @@
 import MatchService from '@/services/match.service';
 import { NextFunction, Request, Response } from 'express';
 import { dto } from 'galeforce';
-import { LorRegion } from 'galeforce/dist/riot-api';
+import { LorRegion } from '@config';
 
 class MatchController {
   public matchService = new MatchService();

@@ -7,7 +7,7 @@ jobs:
   include:
     # ...
     - name: Create release and notify Sentry of deploy
-      env: SENTRY_ORG=nathanael-a2 SENTRY_PROJECT=lor-tracker SENTRY_ENVIRONMENT=production
+      env: SENTRY_ORG=nathanael-a2 SENTRY_PROJECT=lor-tracker SENTRY_ENVIRONMENT=test
       script: |
         curl -sL https://sentry.io/get-cli/ | bash
         export SENTRY_RELEASE=$(sentry-cli releases propose-version)

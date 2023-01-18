@@ -1,7 +1,7 @@
 import { HttpException } from '@/exceptions/HttpException';
 import { isEmpty } from 'class-validator';
 import { dto } from 'galeforce';
-import { LorRegion } from 'galeforce/dist/riot-api';
+import { LorRegion } from '@config';
 import galeforce from '@/utils/galeforce';
 
 class MatchService {

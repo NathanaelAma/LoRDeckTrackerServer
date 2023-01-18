@@ -1,7 +1,7 @@
 import { HttpException } from '@/exceptions/HttpException';
 import { isEmpty } from 'class-validator';
 import { dto } from 'galeforce';
-import { LeagueRegion } from 'galeforce/dist/riot-api';
+import { LeagueRegion } from '@config';
 import galeforce from '@/utils/galeforce';
 
 class SummonerService {

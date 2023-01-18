@@ -11,9 +11,11 @@ class MatchRoute implements Routes {
     this.initializeRoutes();
   }
 
+  regex = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
+
   private initializeRoutes() {
     this.router.get(`${this.path}`, this.matchController.getMatchList);
-    this.router.get(`${this.path}/:matchId`, this.matchController.getMatchDetail);
+    this.router.get(`${this.path}/:matchId(${this.regex})`, this.matchController.getMatchDetail);
   }
 }
 
