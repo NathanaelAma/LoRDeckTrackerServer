@@ -26,18 +26,14 @@ services:
     networks:
       - backend
     links:
-      - mysql
+      - mongo
     depends_on:
-      - mysql
-  mysql:
-    image: mysql:5.7
-    container_name: mysql
-    environment:
-      MYSQL_ROOT_USER: root
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: test
+      - mongo
+  mongo:
+    image: mvertes/alpine-mongo
+    container_name: mongo
     ports:
-      - '3306:3306'
+      - '27017:27017'
     networks:
       - backend
 
