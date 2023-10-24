@@ -6,7 +6,7 @@ import { applicationDefault, initializeApp } from 'firebase-admin/app';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
-import { connect, set } from 'mongoose';
+import { ConnectOptions, connect, set } from 'mongoose';
 import * as Sentry from '@sentry/node';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
@@ -27,6 +27,7 @@ class App {
     this.env = NODE_ENV || 'development';
     this.port = PORT || 3000;
 
+    this.connectToDatabase();
     this.initializeSentry();
     this.initializeFirebase();
     this.initializeMiddlewares();
@@ -48,12 +49,12 @@ class App {
     return this.app;
   }
 
-  private async connectToDatabase() {
+  private connectToDatabase() {
     if (this.env !== 'production') {
       set('debug', true);
     }
 
-    await connect(dbConnection.url, dbConnection.options as any);
+    connect(dbConnection.url, dbConnection.options as ConnectOptions);
   }
 
   private initializeMiddlewares() {
