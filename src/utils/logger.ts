@@ -5,9 +5,9 @@ import winstonDaily from 'winston-daily-rotate-file';
 import { LOG_DIR, NODE_ENV } from '@config';
 
 // logs dir
-const logDir: string = join(__dirname, LOG_DIR);
+const logDir: string = NODE_ENV === 'production' || NODE_ENV === 'development' ? join(__dirname, LOG_DIR) : '';
 
-if (!existsSync(logDir)) {
+if ((!existsSync(logDir) && NODE_ENV === 'production') || NODE_ENV === 'development') {
   mkdirSync(logDir);
 }
 
