@@ -29,7 +29,7 @@ class App {
 
     this.connectToDatabase();
     this.initializeSentry();
-    this.initializeFirebase();
+    // this.initializeFirebase();
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
     this.initializeSwagger();
