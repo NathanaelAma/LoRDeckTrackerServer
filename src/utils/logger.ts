@@ -7,7 +7,7 @@ import { LOG_DIR, NODE_ENV } from '@config';
 // logs dir
 const logDir: string = NODE_ENV === 'production' || NODE_ENV === 'development' ? join(__dirname, LOG_DIR) : '';
 
-if ((!existsSync(logDir) && NODE_ENV === 'production') || NODE_ENV === 'development') {
+if (!existsSync(logDir)) {
   mkdirSync(logDir);
 }
 
