@@ -4,31 +4,31 @@
     {
       "type": "node-terminal",
       "request": "launch",
-      "name": "Dev typescript-express-starter",
+      "name": "Dev LoR Server",
       "command": "npm run dev"
     },
     {
       "type": "node-terminal",
       "request": "launch",
-      "name": "Start typescript-express-starter",
+      "name": "Start LoR Server",
       "command": "npm run start"
     },
     {
       "type": "node-terminal",
       "request": "launch",
-      "name": "Test typescript-express-starter",
+      "name": "Test LoR Server",
       "command": "npm run test"
     },
     {
       "type": "node-terminal",
       "request": "launch",
-      "name": "Lint typescript-express-starter",
+      "name": "Lint LoR Server",
       "command": "npm run lint"
     },
     {
       "type": "node-terminal",
       "request": "launch",
-      "name": "Lint:Fix typescript-express-starter",
+      "name": "Lint:Fix LoR Server",
       "command": "npm run lint:fix"
     }
   ]
