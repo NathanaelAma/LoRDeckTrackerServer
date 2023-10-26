@@ -54,6 +54,8 @@ class App {
       set('debug', true);
     }
 
+    set('strictQuery', true);
+
     connect(dbConnection.url, dbConnection.options as ConnectOptions);
   }
 

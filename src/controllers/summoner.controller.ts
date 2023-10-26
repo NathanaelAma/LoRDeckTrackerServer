@@ -1,3 +1,4 @@
+import { RequestWithUser } from '@/interfaces/auth.interface';
 import SummonerService from '@/services/summoner.service';
 import { NextFunction, Request, Response } from 'express';
 import { SummonerDTO } from 'galeforce/dist/galeforce/interfaces/dto';
@@ -26,6 +27,17 @@ class SummonerController {
         const summonerData: SummonerDTO = await this.summonerService.getSummonerByPuuid(puuid, region);
         res.status(200).json({ data: summonerData });
       }
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public addSummonerToUser = async (req: RequestWithUser, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const region: LeagueRegion = LeagueRegion[req.query.region.toString()];
+      const summonerName: string = req.query.summonerName.toString();
+      const summonerData: SummonerDTO = await this.summonerService.addSummonerToUser(summonerName, region, req.user);
+      res.status(200).json({ data: summonerData });
     } catch (error) {
       next(error);
     }

@@ -1,0 +1,20 @@
+# baseURL
+@baseURL = http://localhost:3000/summoner
+@summonerName = Voltage Hokage
+@loRRegion = europe
+@region = EUROPE_WEST
+
+
+# Get summoner profile
+GET {{ baseURL }}
+    ?summonerName={{summonerName}}
+    &region={{region}}
+
+
+
+###
+# Add summoner profile
+POST {{ baseURL }}/add
+    ?summonerName={{summonerName}}
+    &region={{region}}
+

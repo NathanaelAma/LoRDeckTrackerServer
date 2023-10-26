@@ -10,8 +10,6 @@ export class CreateSummonerDto {
   @IsString()
   public name: string;
   @IsString()
-  public id: string;
-  @IsString()
   public puuid: string;
   @IsInt()
   public summonerLevel: number;
