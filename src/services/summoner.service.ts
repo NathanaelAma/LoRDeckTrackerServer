@@ -31,6 +31,10 @@ class SummonerService {
     if (isEmpty(user)) throw new HttpException(400, 'user is empty');
 
     const summoner: dto.SummonerDTO = await galeforce.lol.summoner().name(summonerName).region(region).exec();
+    const summonerExists = await this.summoners.findOne({ summonerId: summoner.id });
+    if (!isEmpty(summonerExists))
+      throw new HttpException(409, `Summoner with id ${summoner.id} already linked to user with username ${user.username}`);
+
     await this.summoners.create({ ...summoner, userId: user._id });
     return summoner;
   }

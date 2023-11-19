@@ -9,10 +9,8 @@ jobs:
       name: "Unit Tests"
       script: npm run test
     - stage: deploy
-      on:
-        branch: main
-      tags: true
-    - name: Create release and notify Sentry of deploy
+      branch: main
+      name: Create release and notify Sentry of deploy
       env: SENTRY_ORG=nathanael-a2 SENTRY_PROJECT=lor-tracker SENTRY_ENVIRONMENT=test
       script: |
         curl -sL https://sentry.io/get-cli/ | bash
