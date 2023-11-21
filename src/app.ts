@@ -2,7 +2,11 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
-import { applicationDefault, initializeApp } from 'firebase-admin/app';
+import firebase from 'firebase/app';
+import { initializeApp } from 'firebase/app';
+import firebaseAdmin from 'firebase-admin';
+import { Analytics } from 'firebase/analytics';
+import { Auth, getAuth } from 'firebase/auth';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
@@ -16,9 +20,14 @@ import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import sentryMiddleware from '@/middlewares/sentry.middleware';
 import { logger, stream } from '@utils/logger';
+import serviceAccount from './../firebase.json';
 
 class App {
   public app: express.Application;
+  public firebaseAdmin: firebaseAdmin.app.App;
+  public firebaseApp: firebase.FirebaseApp;
+  public firebaseAnalitics: Analytics;
+  public firebaseAuth: Auth;
   public env: string;
   public port: string | number;
 
@@ -101,10 +110,25 @@ class App {
   }
 
   private initializeFirebase() {
-    initializeApp({
-      credential: applicationDefault(),
-      databaseURL: 'https://<DATABASE_NAME>.firebaseio.com',
+    const firebaseConfig = {
+      apiKey: 'AIzaSyAZGtdvpCcH8fyKtNwE-5Gym6XlKYbFAqs',
+      authDomain: 'legends-of-runeterra-tracker.firebaseapp.com',
+      databaseURL: 'https://legends-of-runeterra-tracker-default-rtdb.europe-west1.firebasedatabase.app',
+      projectId: 'legends-of-runeterra-tracker',
+      storageBucket: 'legends-of-runeterra-tracker.appspot.com',
+      messagingSenderId: '891500544313',
+      appId: '1:891500544313:web:a2fb411ae9bedb7b25e8e8',
+      measurementId: 'G-VKK10JBE7V',
+    };
+
+    this.firebaseAdmin = firebaseAdmin.initializeApp({
+      credential: firebaseAdmin.credential.cert(serviceAccount as any),
+      databaseURL: 'https://legends-of-runeterra-tracker-default-rtdb.europe-west1.firebasedatabase.app',
     });
+
+    this.firebaseApp = initializeApp(firebaseConfig);
+    logger.info('firebase initialized');
+    this.firebaseAuth = getAuth(this.firebaseApp);
   }
 }
 
