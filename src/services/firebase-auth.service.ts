@@ -31,13 +31,15 @@ class FirebaseAuthService {
     const auth = getAuth();
     if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
 
-    const firebaseUserData = await signInWithEmailAndPassword(auth, userData.email, userData.password);
-
     const findUser: User = await this.users.findOne({ email: userData.email });
     if (!findUser) throw new HttpException(409, `This email ${userData.email} was not found`);
 
     const isPasswordMatching: boolean = await compare(userData.password, findUser.password);
     if (!isPasswordMatching) throw new HttpException(409, 'Password is not matching');
+
+    const firebaseUserData = await signInWithEmailAndPassword(auth, userData.email, userData.password);
+
+    findUser.userId = firebaseUserData.user.uid.toString();
 
     const tokenData = this.createToken(findUser);
     const cookie = this.createCookie(tokenData);
@@ -49,14 +51,17 @@ class FirebaseAuthService {
     const auth = getAuth();
     if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
 
+    const firebaseUserData = auth.currentUser;
     const findUser: User = await this.users.findOne({ email: userData.email, password: userData.password });
     if (!findUser) throw new HttpException(409, `This email ${userData.email} was not found`);
 
+    findUser.userId = firebaseUserData.uid.toString();
     signOut(auth)
       .then(() => {
         logger.info('User signed out');
       })
       .catch(error => {
+        logger.error('Error signing out');
         logger.error(error);
       });
 
