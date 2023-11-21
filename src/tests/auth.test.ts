@@ -22,7 +22,7 @@ describe('Testing Auth', () => {
 
       users.findOne = jest.fn().mockReturnValue(null);
       users.create = jest.fn().mockReturnValue({
-        _id: '60706478aad6c9ad19a31c84',
+        userId: '60706478aad6c9ad19a31c84',
         email: userData.email,
         password: await bcrypt.hash(userData.password, 10),
       });
@@ -44,7 +44,7 @@ describe('Testing Auth', () => {
       const users = authRoute.authController.authService.users;
 
       users.findOne = jest.fn().mockReturnValue({
-        _id: '60706478aad6c9ad19a31c84',
+        userId: '60706478aad6c9ad19a31c84',
         email: userData.email,
         password: await bcrypt.hash(userData.password, 10),
       });
@@ -61,7 +61,7 @@ describe('Testing Auth', () => {
   // describe('[POST] /logout', () => {
   //   it('logout Set-Cookie Authorization=; Max-age=0', async () => {
   //     const userData: User = {
-  //       _id: '60706478aad6c9ad19a31c84',
+  //       userId: '60706478aad6c9ad19a31c84',
   //       email: 'test@email.com',
   //       password: await bcrypt.hash('q1w2e3r4!', 10),
   //     };

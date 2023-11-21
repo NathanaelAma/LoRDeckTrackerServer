@@ -16,7 +16,7 @@ class UserService {
   public async findUserById(userId: string): Promise<User> {
     if (isEmpty(userId)) throw new HttpException(400, 'UserId is empty');
 
-    const findUser: User = await this.users.findOne({ _id: userId });
+    const findUser: User = await this.users.findOne({ userId: userId });
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
     return findUser;
@@ -39,7 +39,7 @@ class UserService {
 
     if (userData.email) {
       const findUser: User = await this.users.findOne({ email: userData.email });
-      if (findUser && findUser._id !== userId) throw new HttpException(409, `This email ${userData.email} already exists`);
+      if (findUser && findUser.userId !== userId) throw new HttpException(409, `This email ${userData.email} already exists`);
     }
 
     if (userData.password) {

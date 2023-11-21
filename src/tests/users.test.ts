@@ -17,17 +17,17 @@ describe('Testing Users', () => {
 
       users.find = jest.fn().mockReturnValue([
         {
-          _id: 'qpwoeiruty',
+          userId: 'qpwoeiruty',
           email: 'a@email.com',
           password: await bcrypt.hash('q1w2e3r4!', 10),
         },
         {
-          _id: 'alskdjfhg',
+          userId: 'alskdjfhg',
           email: 'b@email.com',
           password: await bcrypt.hash('a1s2d3f4!', 10),
         },
         {
-          _id: 'zmxncbv',
+          userId: 'zmxncbv',
           email: 'c@email.com',
           password: await bcrypt.hash('z1x2c3v4!', 10),
         },
@@ -47,7 +47,7 @@ describe('Testing Users', () => {
       const users = usersRoute.usersController.userService.users;
 
       users.findOne = jest.fn().mockReturnValue({
-        _id: 'qpwoeiruty',
+        userId: 'qpwoeiruty',
         email: 'a@email.com',
         password: await bcrypt.hash('q1w2e3r4!', 10),
       });
@@ -70,7 +70,7 @@ describe('Testing Users', () => {
 
       users.findOne = jest.fn().mockReturnValue(null);
       users.create = jest.fn().mockReturnValue({
-        _id: '60706478aad6c9ad19a31c84',
+        userId: '60706478aad6c9ad19a31c84',
         email: userData.email,
         password: await bcrypt.hash(userData.password, 10),
       });
@@ -94,14 +94,14 @@ describe('Testing Users', () => {
 
       if (userData.email) {
         users.findOne = jest.fn().mockReturnValue({
-          _id: userId,
+          userId: userId,
           email: userData.email,
           password: await bcrypt.hash(userData.password, 10),
         });
       }
 
       users.findByIdAndUpdate = jest.fn().mockReturnValue({
-        _id: userId,
+        userId: userId,
         email: userData.email,
         password: await bcrypt.hash(userData.password, 10),
       });
@@ -120,7 +120,7 @@ describe('Testing Users', () => {
       const users = usersRoute.usersController.userService.users;
 
       users.findByIdAndDelete = jest.fn().mockReturnValue({
-        _id: '60706478aad6c9ad19a31c84',
+        userId: '60706478aad6c9ad19a31c84',
         email: 'test@email.com',
         password: await bcrypt.hash('q1w2e3r4!', 10),
       });
