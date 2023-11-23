@@ -17,13 +17,7 @@ export enum LeagueRegion {
   TURKEY = 'tr1',
   JAPAN = 'jp1',
 }
-export enum RiotRegion {
-  AMERICAS = 'americas',
-  ASIA = 'asia',
-  EUROPE = 'europe',
-  SEA = 'sea',
-  ESPORTS = 'esports',
-}
+
 export enum LorRegion {
   AMERICAS = 'americas',
   EUROPE = 'europe',
@@ -38,17 +32,4 @@ export enum ValorantRegion {
   NORTH_AMERICA = 'na',
   PBE = 'pbe1',
   ESPORTS = 'esports',
-}
-export enum DataDragonRegion {
-  BRAZIL = 'br',
-  EUROPE_NORTHEAST = 'eune',
-  EUROPE_WEST = 'euw',
-  KOREA = 'kr',
-  LATIN_AMERICA_NORTH = 'lan',
-  LATIN_AMERICA_SOUTH = 'las',
-  NORTH_AMERICA = 'na',
-  OCEANIA = 'oce',
-  RUSSIA = 'ru',
-  TURKEY = 'tr',
-  JAPAN = 'jp',
 }
