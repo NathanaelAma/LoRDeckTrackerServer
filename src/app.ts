@@ -127,7 +127,6 @@ class App {
     });
 
     this.firebaseApp = initializeApp(firebaseConfig);
-    logger.info('firebase initialized');
     this.firebaseAuth = getAuth(this.firebaseApp);
   }
 }
