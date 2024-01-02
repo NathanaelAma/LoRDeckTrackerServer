@@ -2,7 +2,6 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
-import { applicationDefault, initializeApp } from 'firebase-admin/app';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
@@ -29,7 +28,6 @@ class App {
 
     this.connectToDatabase();
     this.initializeSentry();
-    // this.initializeFirebase();
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
     this.initializeSwagger();
@@ -102,13 +100,6 @@ class App {
     sentryMiddleware(this);
     this.app.use(Sentry.Handlers.requestHandler());
     this.app.use(Sentry.Handlers.tracingHandler());
-  }
-
-  private initializeFirebase() {
-    initializeApp({
-      credential: applicationDefault(),
-      databaseURL: 'https://<DATABASE_NAME>.firebaseio.com',
-    });
   }
 }
 
