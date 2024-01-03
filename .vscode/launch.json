@@ -5,19 +5,19 @@
       "type": "node-terminal",
       "request": "launch",
       "name": "Dev typescript-express-starter",
-      "command": "npm run dev"
+      "command": "doppler run -- npm run dev"
     },
     {
       "type": "node-terminal",
       "request": "launch",
       "name": "Start typescript-express-starter",
-      "command": "npm run start"
+      "command": "doppler run -- npm run start"
     },
     {
       "type": "node-terminal",
       "request": "launch",
       "name": "Test typescript-express-starter",
-      "command": "npm run test"
+      "command": "doppler run -- npm run test"
     },
     {
       "type": "node-terminal",
