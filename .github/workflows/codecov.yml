@@ -16,6 +16,10 @@ jobs:
       - name: Run tests and collect coverage
         env:
           LOG_DIR: ${{ secrets.LOG_DIR }}
+          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_DATABASE: ${{ secrets.DB_DATABASE }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: npm run test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
