@@ -7,6 +7,7 @@ jobs:
     steps:
       - name: Doppler Secrets Fetcher
         uses: dopplerhq/secrets-fetch-action@v1.1.2
+        id: doppler
         with:
           doppler-token: ${{ secrets.DOPPLER_TOKEN }}
 
