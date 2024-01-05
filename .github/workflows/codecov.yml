@@ -8,8 +8,9 @@ jobs:
       - name: Doppler Secrets Fetcher
         uses: dopplerhq/secrets-fetch-action@v1.1.2
         id: doppler
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
         with:
-          doppler-token: ${{ secrets.DOPPLER_TOKEN }}
           inject-env-vars: true
       - run: echo "DOPPLER_PROJECT is ${{ steps.doppler.outputs.DOPPLER_PROJECT }} (Doppler meta environment variables are unmasked)"
 
