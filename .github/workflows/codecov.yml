@@ -10,6 +10,7 @@ jobs:
         id: doppler
         with:
           doppler-token: ${{ secrets.DOPPLER_TOKEN }}
+          
           inject-env-vars: true
       - run: echo "DOPPLER_PROJECT is ${{ steps.doppler.outputs.DOPPLER_PROJECT }} (Doppler meta environment variables are unmasked)"
 
