@@ -28,6 +28,6 @@ jobs:
         #   DB_HOST: ${{ secrets.DB_HOST }}
         #   DB_DATABASE: ${{ secrets.DB_DATABASE }}
         #   SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        run: doppler run -- npm run test
+        run: npm run test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
