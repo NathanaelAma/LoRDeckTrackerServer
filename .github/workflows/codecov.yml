@@ -6,13 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: testing
     steps:
-      - name: Install Doppler CLI
-        uses: dopplerhq/cli-action@v2
-        id: doppler
-      - name: Fetch secrets
-        run: doppler secrets --only-names
-        env:
-          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up Node 19.1
@@ -22,12 +15,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run tests and collect coverage
-        # env:
-        #   LOG_DIR: ${{ secrets.LOG_DIR }}
-        #   RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
-        #   DB_HOST: ${{ secrets.DB_HOST }}
-        #   DB_DATABASE: ${{ secrets.DB_DATABASE }}
-        #   SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        env:
+          LOG_DIR: ${{ secrets.LOG_DIR }}
+          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_DATABASE: ${{ secrets.DB_DATABASE }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: npm run test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
