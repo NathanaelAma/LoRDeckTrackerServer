@@ -2,8 +2,9 @@ name: Upload to CodeCov
 
 on: [push, pull_request]
 jobs:
-  code:
+  run:
     runs-on: ubuntu-latest
+    environment: testing
     steps:
       - name: Install Doppler CLI
         uses: dopplerhq/cli-action@v2
@@ -27,6 +28,6 @@ jobs:
         #   DB_HOST: ${{ secrets.DB_HOST }}
         #   DB_DATABASE: ${{ secrets.DB_DATABASE }}
         #   SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        run: npm run test
+        run: doppler run -- npm run test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
