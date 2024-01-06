@@ -2,18 +2,16 @@ name: Upload to CodeCov
 
 on: [push, pull_request]
 jobs:
-  run:
+  code:
     runs-on: ubuntu-latest
     steps:
-      - name: Doppler Secrets Fetcher
-        uses: dopplerhq/secrets-fetch-action@v1.1.2
+      - name: Install Doppler CLI
+        uses: dopplerhq/cli-action@v2
         id: doppler
-        with:
-          doppler-token: ${{ secrets.DOPPLER_TOKEN }}
-
-          inject-env-vars: true
-      - run: echo "DOPPLER_PROJECT is ${{ steps.doppler.outputs.DOPPLER_PROJECT }} (Doppler meta environment variables are unmasked)"
-
+      - name: Fetch secrets
+        run: doppler secrets --only-names
+        env:
+          DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up Node 19.1
