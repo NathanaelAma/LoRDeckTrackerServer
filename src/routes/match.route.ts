@@ -6,15 +6,15 @@ class MatchRoute implements Routes {
   public path = '/match';
   public router = Router();
   public matchController = new MatchController();
+  private regex: String = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
 
   constructor() {
     this.initializeRoutes();
   }
 
-  regex = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
-
   private initializeRoutes() {
     this.router.get(`${this.path}`, this.matchController.getMatchList);
+    this.router.get(`${this.path}/:matchId(${this.regex})/players`, this.matchController.getMatchPlayers);
     this.router.get(`${this.path}/:matchId(${this.regex})`, this.matchController.getMatchDetail);
   }
 }
