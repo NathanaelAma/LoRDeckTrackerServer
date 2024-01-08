@@ -10,4 +10,6 @@ enabled = true
     environment = ["nodejs", "jest","mongo"]
     module_system = "es-modules"
     dialect = "typescript"
+name = "test-coverage"
+enabled = true
 

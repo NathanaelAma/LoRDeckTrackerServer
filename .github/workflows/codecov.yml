@@ -30,3 +30,9 @@ jobs:
         continue-on-error: true
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
+      - name: Report test coverage to DeepSource
+        uses: deepsourcelabs/test-coverage-action@master
+        with:
+            key: javascript
+            coverage-file: coverage.xml
+            dsn: ${{ secrets.DEEPSOURCE_DSN }}
