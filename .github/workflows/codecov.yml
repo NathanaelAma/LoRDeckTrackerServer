@@ -34,5 +34,5 @@ jobs:
         uses: deepsourcelabs/test-coverage-action@master
         with:
             key: javascript
-            coverage-file: coverage.xml
+            coverage-file: cobertura-coverage.xml
             dsn: ${{ secrets.DEEPSOURCE_DSN }}
