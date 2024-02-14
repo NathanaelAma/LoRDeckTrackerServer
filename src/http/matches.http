@@ -1,0 +1,17 @@
+# baseURL
+@baseURL = http://localhost:3000/match
+@puuid = AU8RFQUNUqhx9-i-An0ARACLxbrAqYWvrkWC3IUhRYI5iE5ze7gjI_yRI_0X9tp_lKrHawhpuO2AHQ
+@region = EUROPE_WEST
+@loRRegion = EUROPE
+
+
+#get matchlist
+GET {{ baseURL }}
+    ?puuid={{puuid}}
+    &region={{loRRegion}}
+
+
+###
+#get match
+GET {{ baseURL }}
+
