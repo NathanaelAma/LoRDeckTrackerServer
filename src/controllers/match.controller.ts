@@ -37,6 +37,19 @@ class MatchController {
       next(error);
     }
   };
+
+  public getMatchPlayers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const region: LorRegion = LorRegion[req.query.region.toString()];
+      const matchId: string = req.params.matchId;
+
+      const matchData: dto.LorMatchDTO = await this.matchService.getMatchById(matchId, region);
+      const matchPlayers: dto.PlayerDTO[] = matchData.info.players;
+      res.status(200).json({ data: matchPlayers });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default MatchController;
