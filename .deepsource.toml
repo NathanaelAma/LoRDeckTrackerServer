@@ -3,13 +3,17 @@ version = 1
 test_patterns = ["*/tests/**"]
 
 [[analyzers]]
-name = "javascript"
-enabled = true
-
-    [analyzers.meta]
-    environment = ["nodejs", "jest","mongo"]
-    module_system = "es-modules"
-    dialect = "typescript"
 name = "test-coverage"
-enabled = true
 
+[[analyzers]]
+name = "javascript"
+
+  [analyzers.meta]
+  environment = [
+    "nodejs",
+    "jest",
+    "mongo"
+  ]
+
+[[transformers]]
+name = "prettier"
