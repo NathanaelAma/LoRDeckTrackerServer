@@ -14,6 +14,7 @@ import { dbConnection } from '@database';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import sentryMiddleware from '@/middlewares/sentry.middleware';
+import limiterMiddleware from '@/middlewares/ratelimit.middleware';
 import { logger, stream } from '@utils/logger';
 
 class App {
@@ -66,6 +67,7 @@ class App {
     this.app.use(helmet());
     this.app.use(compression());
     this.app.use(express.json());
+    this.app.use(limiterMiddleware);
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
   }
