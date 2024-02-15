@@ -67,7 +67,7 @@ class App {
     this.app.use(helmet());
     this.app.use(compression());
     this.app.use(express.json());
-    this.app.use(limiterMiddleware)
+    this.app.use(limiterMiddleware);
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
   }
