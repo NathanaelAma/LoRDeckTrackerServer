@@ -6,7 +6,7 @@ class MatchRoute implements Routes {
   public path = '/match';
   public router = Router();
   public matchController = new MatchController();
-  private regex = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
+  protected regex = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
 
   constructor() {
     this.initializeRoutes();
