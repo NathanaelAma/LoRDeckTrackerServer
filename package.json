@@ -1,6 +1,6 @@
 {
   "name": "lor_deck_tracker",
-  "version": "0.0.1alpha",
+  "version": "0.0.1",
   "description": "Legends of Runterra Deck and history Tracker",
   "author": "Nathanael Ama",
   "license": "ISC",
@@ -28,6 +28,7 @@
     "dotenv": "^16.0.1",
     "envalid": "^7.3.1",
     "express": "^4.18.1",
+    "express-rate-limit": "^7.1.5",
     "firebase-admin": "^11.5.0",
     "galeforce": "^0.6.0",
     "helmet": "^5.1.1",
