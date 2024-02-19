@@ -1,7 +1,7 @@
 import { RequestWithUser } from '@/interfaces/auth.interface';
 import SummonerService from '@/services/summoner.service';
 import { NextFunction, Request, Response } from 'express';
-import { SummonerDTO } from 'galeforce/dist/galeforce/interfaces/dto';
+import { AccountDTO, SummonerDTO } from 'galeforce/dist/galeforce/interfaces/dto';
 import { LeagueRegion } from 'galeforce/dist/riot-api';
 class SummonerController {
   public summonerService = new SummonerService();
@@ -24,7 +24,7 @@ class SummonerController {
         res.status(200).json({ data: summonerData });
       } else if (req.query.puuid !== undefined) {
         const puuid: string = req.query.puuid.toString();
-        const summonerData: SummonerDTO = await this.summonerService.getSummonerByPuuid(puuid, region);
+        const summonerData: SummonerDTO | AccountDTO = await this.summonerService.getSummonerByPuuid(puuid, region);
         res.status(200).json({ data: summonerData });
       }
     } catch (error) {
