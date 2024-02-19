@@ -5,7 +5,7 @@ import { LorRegion } from '@config';
 import galeforce from '@/utils/galeforce';
 
 class LeaderboardService {
-  public async getLeaderboard(region: LorRegion): Promise<any> {
+  public async getLeaderboard(region: LorRegion): Promise<dto.LorLeaderboardDTO> {
     if (isEmpty(region)) throw new HttpException(400, 'region is empty');
 
     const leaderboard: dto.LorLeaderboardDTO = await galeforce.lor.ranked.leaderboard().region(region).exec();

@@ -11,7 +11,7 @@ import { logger } from '@/utils/logger';
 class SummonerService {
   public summoners = summonerModel;
 
-  public async getSummonerByName(summonerName: string, region: LeagueRegion): Promise<any> {
+  public async getSummonerByName(summonerName: string, region: LeagueRegion): Promise<dto.SummonerDTO> {
     if (isEmpty(summonerName)) throw new HttpException(400, 'summonerName is empty');
     if (isEmpty(region)) throw new HttpException(400, 'region is empty');
 
@@ -19,7 +19,7 @@ class SummonerService {
     return summoner;
   }
 
-  public async getSummonerByPuuid(puuid: string, region: LeagueRegion | RiotRegion): Promise<any> {
+  public async getSummonerByPuuid(puuid: string, region: LeagueRegion | RiotRegion): Promise<dto.AccountDTO | dto.SummonerDTO> {
     if (isEmpty(puuid)) throw new HttpException(400, 'puuid is empty');
     if (isEmpty(region)) throw new HttpException(400, 'region is empty');
 
@@ -44,7 +44,7 @@ class SummonerService {
     }
   }
 
-  public async addSummonerToUser(summonerName: string, region: LeagueRegion, user: User): Promise<any> {
+  public async addSummonerToUser(summonerName: string, region: LeagueRegion, user: User): Promise<dto.SummonerDTO> {
     if (isEmpty(summonerName)) throw new HttpException(400, 'summonerName is empty');
     if (isEmpty(region)) throw new HttpException(400, 'region is empty');
     if (isEmpty(user)) throw new HttpException(400, 'user is empty');
