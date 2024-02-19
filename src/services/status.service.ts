@@ -5,7 +5,7 @@ import { LorRegion } from '@config';
 import galeforce from '@/utils/galeforce';
 
 class StatusService {
-  public async getStatus(region: LorRegion): Promise<any> {
+  public async getStatus(region: LorRegion): Promise<dto.PlatformDataDTO> {
     if (isEmpty(region)) throw new HttpException(400, 'region is empty');
 
     const status: dto.PlatformDataDTO = await galeforce.lor.status().region(region).exec();
