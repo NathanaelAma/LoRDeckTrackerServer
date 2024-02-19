@@ -29,7 +29,7 @@ describe('Testing Auth', () => {
         password: await bcrypt.hash(userData.password, 10),
       });
 
-      (mongoose as any).connect = jest.fn();
+      (mongoose as mongoose.Mongoose).connect = jest.fn();
       const app = new App([authRoute]);
       return request(app.getServer()).post(`${authRoute.path}signup`).send(userData);
     });
@@ -53,7 +53,7 @@ describe('Testing Auth', () => {
         password: await bcrypt.hash(userData.password, 10),
       });
 
-      (mongoose as any).connect = jest.fn();
+      (mongoose as mongoose.Mongoose).connect = jest.fn();
       const app = new App([authRoute]);
       return request(app.getServer())
         .post(`${authRoute.path}login`)

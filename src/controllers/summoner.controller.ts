@@ -18,11 +18,11 @@ class SummonerController {
     try {
       const region: LeagueRegion = LeagueRegion[req.query.region.toString()];
 
-      if (req.query.summonerName != undefined) {
+      if (req.query.summonerName !== undefined) {
         const summonerName: string = req.query.summonerName.toString();
         const summonerData: SummonerDTO = await this.summonerService.getSummonerByName(summonerName, region);
         res.status(200).json({ data: summonerData });
-      } else if (req.query.puuid != undefined) {
+      } else if (req.query.puuid !== undefined) {
         const puuid: string = req.query.puuid.toString();
         const summonerData: SummonerDTO = await this.summonerService.getSummonerByPuuid(puuid, region);
         res.status(200).json({ data: summonerData });
