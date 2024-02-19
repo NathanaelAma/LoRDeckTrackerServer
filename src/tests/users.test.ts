@@ -36,7 +36,7 @@ describe('Testing Users', () => {
         },
       ]);
 
-      (mongoose as any).connect = jest.fn();
+      (mongoose as mongoose.Mongoose).connect = jest.fn();
       const app = new App([usersRoute]);
       return request(app.getServer()).get(`${usersRoute.path}`).expect(200);
     });
@@ -56,7 +56,7 @@ describe('Testing Users', () => {
         password: await bcrypt.hash('q1w2e3r4!', 10),
       });
 
-      (mongoose as any).connect = jest.fn();
+      (mongoose as mongoose.Mongoose).connect = jest.fn();
       const app = new App([usersRoute]);
       return request(app.getServer()).get(`${usersRoute.path}/${userId}`).expect(200);
     });
@@ -81,7 +81,7 @@ describe('Testing Users', () => {
         password: await bcrypt.hash(userData.password, 10),
       });
 
-      (mongoose as any).connect = jest.fn();
+      (mongoose as mongoose.Mongoose).connect = jest.fn();
       const app = new App([usersRoute]);
       return request(app.getServer()).post(`${usersRoute.path}`).send(userData).expect(201);
     });
@@ -115,7 +115,7 @@ describe('Testing Users', () => {
         password: await bcrypt.hash(userData.password, 10),
       });
 
-      (mongoose as any).connect = jest.fn();
+      (mongoose as mongoose.Mongoose).connect = jest.fn();
       const app = new App([usersRoute]);
       return request(app.getServer()).put(`${usersRoute.path}/${userId}`).send(userData);
     });
@@ -135,7 +135,7 @@ describe('Testing Users', () => {
         password: await bcrypt.hash('q1w2e3r4!', 10),
       });
 
-      (mongoose as any).connect = jest.fn();
+      (mongoose as mongoose.Mongoose).connect = jest.fn();
       const app = new App([usersRoute]);
       return request(app.getServer()).delete(`${usersRoute.path}/${userName}`).expect(200);
     });
