@@ -13,7 +13,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Set up Node 19.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: set up node 19.1
         uses: actions/setup-node@v3
         with:
           node-version: 19.1
