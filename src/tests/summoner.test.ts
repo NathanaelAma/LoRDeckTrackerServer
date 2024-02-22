@@ -1,7 +1,6 @@
 import request from 'supertest';
 import App from '@/app';
 import SummonerRoute from '@routes/summoner.route';
-import { warn } from 'console';
 
 afterAll(async () => {
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
