@@ -10,8 +10,8 @@ afterAll(async () => {
 });
 
 afterEach(async () => {
- await mongoose.disconnect();
-})
+  await mongoose.disconnect();
+});
 
 describe('Testing Users', () => {
   describe('[GET] /users', () => {
