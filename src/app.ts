@@ -99,9 +99,11 @@ class App {
   }
 
   private initializeSentry() {
-    sentryMiddleware(this);
-    this.app.use(Sentry.Handlers.requestHandler());
-    this.app.use(Sentry.Handlers.tracingHandler());
+    if (this.env !== 'test') {
+      sentryMiddleware(this);
+      this.app.use(Sentry.Handlers.requestHandler());
+      this.app.use(Sentry.Handlers.tracingHandler());
+    }
   }
 }
 

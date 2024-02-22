@@ -6,7 +6,6 @@ import galeforce from '@/utils/galeforce';
 import summonerModel from '@/models/summoner.model';
 import { User } from '@/interfaces/users.interface';
 import { RiotRegion } from 'galeforce/dist/riot-api';
-import { logger } from '@/utils/logger';
 
 class SummonerService {
   public summoners = summonerModel;
@@ -33,11 +32,9 @@ class SummonerService {
 
     if (isLeagueRegion(region)) {
       const summoner: dto.SummonerDTO = await galeforce.lol.summoner().puuid(puuid).region(region).exec();
-      logger.info(`Summoner: ${summoner}`);
       return summoner;
     } else if (isRiotRegion(region)) {
       const account: dto.AccountDTO = await galeforce.riot.account.account().puuid(puuid).region(region).exec();
-      logger.info(account);
       return account;
     } else {
       throw new HttpException(400, 'region is not valid');
