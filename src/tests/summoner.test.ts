@@ -9,6 +9,7 @@ afterAll(async () => {
 const summonerName = 'Voltage Hokage';
 const puuid = 'AU8RFQUNUqhx9-i-An0ARACLxbrAqYWvrkWC3IUhRYI5iE5ze7gjI_yRI_0X9tp_lKrHawhpuO2AHQ'
 const region = 'EUROPE_WEST';
+const riotRegion = 'EUROPE';
 
 const summonerRoute = new SummonerRoute();
 const app = new App([summonerRoute]);
@@ -38,7 +39,11 @@ describe('Missing summoner name or region', () => {
 describe('Get summoner by puuid', () => {
   describe('[GET] /?puuid=${puuid}&region=${region}', () => {
     it('response statusCode 200', () => {
-      return request(app.getServer()).get(`${summonerRoute.path}?puuid=${puuid}&region=${region}`).expect(200);
+      return request(app.getServer()).get(`${summonerRoute.path}?puuid=${puuid}&region=${riotRegion}`).expect(200);
     });
+    describe('[GET] /?puuid=${puuid}&region=${region}',() => {
+    it('response statusCode 200', async () => {
+      return request(app.getServer()).get(`${summonerRoute.path}?puuid=${puuid}&region=${riotRegion}`).expect(200);
+    })})
   });
 });
