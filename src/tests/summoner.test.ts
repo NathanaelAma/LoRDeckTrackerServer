@@ -41,9 +41,10 @@ describe('Get summoner by puuid', () => {
     it('response statusCode 200', () => {
       return request(app.getServer()).get(`${summonerRoute.path}?puuid=${puuid}&region=${riotRegion}`).expect(200);
     });
-    describe('[GET] /?puuid=${puuid}&region=${region}',() => {
-    it('response statusCode 200', async () => {
-      return request(app.getServer()).get(`${summonerRoute.path}?puuid=${puuid}&region=${riotRegion}`).expect(200);
-    })})
+    describe('[GET] /?puuid=${puuid}&region=${region}', () => {
+      it('response statusCode 200', async () => {
+        return request(app.getServer()).get(`${summonerRoute.path}?puuid=${puuid}&region=${riotRegion}`).expect(200);
+      });
+    });
   });
 });
