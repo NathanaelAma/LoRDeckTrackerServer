@@ -7,7 +7,7 @@ afterAll(async () => {
 });
 
 const summonerName = 'Voltage Hokage';
-const puuid = 'AU8RFQUNUqhx9-i-An0ARACLxbrAqYWvrkWC3IUhRYI5iE5ze7gjI_yRI_0X9tp_lKrHawhpuO2AHQ'
+const puuid = 'AU8RFQUNUqhx9-i-An0ARACLxbrAqYWvrkWC3IUhRYI5iE5ze7gjI_yRI_0X9tp_lKrHawhpuO2AHQ';
 const region = 'EUROPE_WEST';
 const riotRegion = 'EUROPE';
 
