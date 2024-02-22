@@ -24,8 +24,8 @@ class App {
 
   constructor(routes: Routes[]) {
     this.app = express();
-    this.env = NODE_ENV || 'development';
-    this.port = PORT || 3000;
+    this.env = NODE_ENV ?? 'development';
+    this.port = PORT ?? 3000;
 
     this.connectToDatabase();
     this.initializeSentry();
