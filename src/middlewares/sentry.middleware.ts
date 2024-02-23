@@ -11,6 +11,9 @@ const sentryMiddleware = (app: App) => {
     dsn: SENTRY_DSN,
     integrations: [
       new Sentry.Integrations.Http({ tracing: true }),
+      new Sentry.Integrations.Mongo({
+      useMongoose: true,
+      }),
       new Tracing.Integrations.Express({ app: app.getServer() }),
       new BrowserTracing({
         tracePropagationTargets: ['localhost', /^\//],
