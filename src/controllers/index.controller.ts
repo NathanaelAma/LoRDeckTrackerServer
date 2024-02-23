@@ -12,8 +12,8 @@ class IndexController {
   };
   public indexWithAuth = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     try {
-      await const userData: User = req.user;
-      res.status(200).json({ data: userData.username, message: 'indexWithAuth' });
+      const userData: User = req.user;
+      await res.status(200).json({ data: userData.username, message: 'indexWithAuth' });
     } catch (error) {
       next(error);
     }
