@@ -8,7 +8,7 @@ class MatchController {
 
   public index = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      res.status(200).json({ data: 'Hello World', message: 'MatchController' });
+      await res.status(200).json({ data: 'Hello World', message: 'MatchController' });
     } catch (error) {
       next(error);
     }
