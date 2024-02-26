@@ -1,7 +1,6 @@
 import App from '@/app';
 import { NODE_ENV, SENTRY_DSN } from '@/config';
 import * as Sentry from '@sentry/node';
-import * as Tracing from '@sentry/tracing';
 import { BrowserTracing } from '@sentry/tracing';
 
 const sentryMiddleware = (app: App) => {
@@ -11,9 +10,12 @@ const sentryMiddleware = (app: App) => {
     dsn: SENTRY_DSN,
     integrations: [
       new Sentry.Integrations.Http({ tracing: true }),
-      new Tracing.Integrations.Express({ app: app.getServer() }),
+      new Sentry.Integrations.Mongo({
+        useMongoose: true,
+      }),
+      new Sentry.Integrations.Express({ app: app.getServer() }),
       new BrowserTracing({
-        tracePropagationTargets: ['localhost', /^\//],
+        tracePropagationTargets: ['localhost', /^https:\/\/lor-deck-tracker\.onrender\.com\//],
       }),
     ],
     tracesSampleRate: 1.0,
