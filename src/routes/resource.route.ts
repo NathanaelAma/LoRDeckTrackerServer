@@ -14,8 +14,10 @@ class ResourceRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, this.indexController.index);
+    this.router.get(`${this.path}`, this.resourceController.index);
     this.router.get(`${this.path}/bundle`, this.resourceController.getBundle);
+    this.router.get(`${this.path}/regionIcon.png`, this.resourceController.getRegionIcon);
+    this.router.get(`${this.path}/set`, this.resourceController.getSetDetails);
   }
 }
 
