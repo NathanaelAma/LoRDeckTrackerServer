@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    uses: NathanaelAma/LoRDeckTrackerServer/.github/workflows/build.yml@development
+    uses: NathanaelAma/LoRDeckTrackerServer/.github/workflows/build.yml@feature/reusable-workflows
     with:
       environment: testing
 
