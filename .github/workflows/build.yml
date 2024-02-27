@@ -7,6 +7,12 @@ on:
         required: false
         default: testing
         type: string
+    secrets:
+      LOG_DIR: ${{ secrets.LOG_DIR }}
+      RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_DATABASE: ${{ secrets.DB_DATABASE }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
 jobs:
   run:
@@ -22,10 +28,4 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run tests
-        env:
-          LOG_DIR: ${{ secrets.LOG_DIR }}
-          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_DATABASE: ${{ secrets.DB_DATABASE }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: npm run test:ci
