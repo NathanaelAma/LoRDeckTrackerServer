@@ -5,6 +5,7 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   roots: ['<rootDir>/src'],
+  reporters: ['default', ['jest-junit', { outputDirectory: '<rootDir>/test-report' }]],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
