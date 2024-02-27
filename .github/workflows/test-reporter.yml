@@ -9,14 +9,15 @@ on:
      - development
 
 jobs:
-  build-test:
+  build:
+    uses: NathanaelAma/LoRDeckTrackerServer/.github/workflows/build.yml@feature/reusable-workflows
+    with:
+      environment: testing
+
+  report-test:
     runs-on: ubuntu-latest
-    name: Build & Test
-    environment: testing
+    name: Report Tests
     steps:
-      uses: NathanaelAma/LoRDeckTrackerServer/.github/workflows/build.yml@development
-      with:
-        environment: testing
     - name: Test Report
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
