@@ -8,10 +8,12 @@ on:
 
 jobs:
   build:
+    uses: NathanaelAma/LoRDeckTrackerServer/.github/workflows/build.yml@feature/reusable-workflows
+    with:
+      environment: testing
+  report:
     runs-on: ubuntu-latest
     steps:
-      - uses: NathanaelAma/LoRDeckTrackerServer/.github/workflows/build.yml@development
-        with:
-          environment: testing
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3   
+        uses: codecov/codecov-action@v3  
+
