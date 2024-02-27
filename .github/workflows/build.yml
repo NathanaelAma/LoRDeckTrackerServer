@@ -22,6 +22,20 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 19.1
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        id: cache-npm
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: npm list
       - name: Fetch Doppler Secrets
         uses: dopplerhq/secrets-fetch-action@v1.1.3
         id: doppler
