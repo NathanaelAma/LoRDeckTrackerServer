@@ -16,7 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
-      - run: printenv
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up Node 19.1
@@ -29,7 +28,6 @@ jobs:
         with:
           doppler-token: ${{ secrets.DOPPLER_TOKEN }}
           inject-env-vars: true
-      - run: printenv
       - name: Install dependencies
         run: npm ci
       - name: Run tests

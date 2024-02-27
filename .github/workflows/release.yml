@@ -5,13 +5,14 @@ on:
     branches: [main]
 
 jobs:
-  build:
+   build:
+    uses: ./.github/workflows/build.yml
+    with:
+      environment: production
+    secrets: inherit
+   create-release:
     runs-on: ubuntu-latest
-    environment: production
     steps:
-    - uses: NathanaelAma/LoRDeckTrackerServer/.github/workflows/build.yml@development
-      with:
-          environment: production
     - name: Create Sentry release
       uses: getsentry/action-release@v1
       env:
