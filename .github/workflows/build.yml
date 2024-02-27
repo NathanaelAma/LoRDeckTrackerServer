@@ -13,6 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
+      - name: Fetch Doppler Secrets
+        uses: dopplerhq/secrets-fetch-action@v1.1.3
+        id: doppler
+        with:
+          doppler-token: ${{ secrets.DOPPLER_TOKEN }}
+          inject-env-vars: true
+      - run: printenv
       - name: Checkout
         uses: actions/checkout@v3
       - name: Set up Node 19.1
@@ -23,9 +30,9 @@ jobs:
         run: npm ci
       - name: Run tests
         env:
-          LOG_DIR: ${{ secrets.LOG_DIR }}
-          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_DATABASE: ${{ secrets.DB_DATABASE }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          LOG_DIR: ${{ steps.doppler.outputs.LOG_DIR }}
+          RIOT_API_KEY: ${{ steps.doppler.outputs.RIOT_API_KEY }}
+          DB_HOST: ${{ steps.doppler.outputs.DB_HOST }}
+          DB_DATABASE: ${{ steps.doppler.outputs.DB_DATABASE }}
+          SECRET_KEY: ${{ steps.doppler.outputs.SECRET_KEY }}
         run: npm run test:ci
