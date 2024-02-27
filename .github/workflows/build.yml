@@ -1,11 +1,17 @@
 name: Build and Test
 on:
-  [push, pull_request]
+workflow_call:
+  inputs:
+    environment:
+      description: 'Environment to use for build and test'
+      required: true
+      default: testing
+      type: string
 
 jobs:
   run:
     runs-on: ubuntu-latest
-    environment: testing
+    environment: ${{inputs.environment}}
     steps:
       - name: Checkout
         uses: actions/checkout@v3

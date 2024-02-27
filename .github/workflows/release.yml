@@ -9,21 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: set up node 19.1
-        uses: actions/setup-node@v3
-        with:
-          node-version: 19.1
-      - name: Create Sentry release
-        uses: getsentry/action-release@v1
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-        with:
+    - uses: NathanaelAma/LoRDeckTrackerServer/.github/workflows/build.yml@development
+      with:
           environment: production
-          sourcemaps: './src'
+    - name: Create Sentry release
+      uses: getsentry/action-release@v1
+      env:
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+      with:
+        environment: production
+        sourcemaps: './src'
 
 
