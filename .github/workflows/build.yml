@@ -1,5 +1,5 @@
 name: Build and Test
-on:
+on: [push, pull_request]
 workflow_call:
   inputs:
     environment:
