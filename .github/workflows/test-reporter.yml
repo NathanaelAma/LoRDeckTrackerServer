@@ -13,6 +13,7 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       environment: testing
+      secrets: inherit
 
   report-test:
     runs-on: ubuntu-latest
