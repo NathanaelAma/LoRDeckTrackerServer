@@ -7,30 +7,9 @@ on:
     branches: [ feature/* , develop, main]
 
 jobs:
-  run:
-    runs-on: ubuntu-latest
-    environment: testing
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: set up node 19.1
-        uses: actions/setup-node@v3
-        with:
-          node-version: 19.1
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests and collect coverage
-        env:
-          LOG_DIR: ${{ secrets.LOG_DIR }}
-          RIOT_API_KEY: ${{ secrets.RIOT_API_KEY }}
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_DATABASE: ${{ secrets.DB_DATABASE }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        run: npm run test
-        continue-on-error: true
-      - name: Report test coverage to DeepSource
+  build:
+    uses: NathanaelAma/LoRDeckTrackerServer/.github/workflows/build.yml@development
+     - name: Report test coverage to DeepSource
         uses: deepsourcelabs/test-coverage-action@master
         with:
             key: javascript
