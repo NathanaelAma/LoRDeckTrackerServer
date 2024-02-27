@@ -4,7 +4,7 @@ on:
     inputs:
       environment:
         description: 'Environment to use for build and test'
-        required: true
+        required: false
         default: testing
         type: string
 
