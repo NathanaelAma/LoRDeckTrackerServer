@@ -12,6 +12,8 @@ jobs:
     secrets: inherit
    create-release:
     runs-on: ubuntu-latest
+    environment: production
+    needs: build
     steps:
     - name: Create Sentry release
       uses: getsentry/action-release@v1
