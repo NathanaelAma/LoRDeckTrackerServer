@@ -10,13 +10,14 @@ on:
 
 jobs:
   build:
-    uses: NathanaelAma/LoRDeckTrackerServer/.github/workflows/build.yml@feature/reusable-workflows
+    uses: ./.github/workflows/build.yml
     with:
       environment: testing
 
   report-test:
     runs-on: ubuntu-latest
     name: Report Tests
+    needs: build
     steps:
     - name: Test Report
       uses: EnricoMi/publish-unit-test-result-action@v2
