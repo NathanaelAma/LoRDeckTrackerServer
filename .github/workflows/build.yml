@@ -52,7 +52,7 @@ jobs:
           DB_DATABASE: ${{ steps.doppler.outputs.DB_DATABASE }}
           SECRET_KEY: ${{ steps.doppler.outputs.SECRET_KEY }}
         run: npm run test:ci
-      - if: ${{ inputs.environment == "testing" }} 
+      - if: ${{ inputs.environment == testing }} 
         name: Archive Test Results
         uses: actions/upload-artifact@v4
         with:
