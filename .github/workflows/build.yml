@@ -53,12 +53,18 @@ jobs:
           SECRET_KEY: ${{ steps.doppler.outputs.SECRET_KEY }}
         run: npm run test:ci
       - if: ${{ inputs.environment == 'testing' }} 
-        name: Archive Test Results
+        name: Archive Coverage Report
         uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
           path: coverage/cobertura-coverage.xml
           retention-days: 5
           if-no-files-found: warn
-
-        
+      - if: ${{ inputs.environment == 'testing' }} 
+        name: Archive Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: test-coverage/*.xml 
+          retention-days: 5
+          if-no-files-found: warn
