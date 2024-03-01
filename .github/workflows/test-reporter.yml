@@ -29,6 +29,6 @@ jobs:
       if: always()
       with:
         files: |
-          test-report/**/*.xml
+          junit.xml
 
 
