@@ -57,5 +57,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
-          path: ./src/coverage/cobertura-coverage.xml
+          path: .${{ github.workspace }}/src/coverage/cobertura-coverage.xml
+          if-no-files-found: warn
+
         
