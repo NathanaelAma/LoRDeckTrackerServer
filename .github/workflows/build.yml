@@ -58,6 +58,7 @@ jobs:
         with:
           name: code-coverage-report
           path: coverage/cobertura-coverage.xml
+          retention-days: 5
           if-no-files-found: warn
 
         
