@@ -10,6 +10,7 @@ const version = 'latest';
 const locale = 'en_us';
 const lorRegion = 'noxus';
 const lorSet = 1;
+const cardId = '01IO012';
 
 describe('Testing Index', () => {
   describe('[GET] /', () => {
@@ -23,7 +24,7 @@ describe('Testing Index', () => {
 });
 
 describe('Testing Bundle', () => {
-  describe('[GET] /resource/bundle/?version={version}&locale=${locale}', () => {
+  describe('[GET] /resource/bundle/?version=${version}&locale=${locale}', () => {
     it('response statusCode 200', () => {
       const resourceRoute = new ResourceRoute();
       const app = new App([resourceRoute]);
@@ -85,14 +86,14 @@ describe('Testing Set', () => {
 });
 
 describe('Testing regionIcon', () => {
-  describe('[GET] /regionIcon.png?version=${version}&locale=${locale}&region=${lorRegion}', () => {
+  describe('[GET] /resource/regionIcon.png?version=${version}&locale=${locale}&region=${lorRegion}', () => {
     it('response statusCode 200', () => {
       const resourceRoute = new ResourceRoute();
       const app = new App([resourceRoute]);
 
       return request(app.getServer()).get(`${resourceRoute.path}/regionIcon.png?version=${version}&locale=${locale}&region=${lorRegion}`).expect(200);
     });
-    describe('[GET] /regionIcon.png?version=&locale=${locale}&region=${lorRegion}', () => {
+    describe('[GET] /resource/regionIcon.png?version=&locale=${locale}&region=${lorRegion}', () => {
       it('response statusCode 400', () => {
         const resourceRoute = new ResourceRoute();
         const app = new App([resourceRoute]);
@@ -100,7 +101,7 @@ describe('Testing regionIcon', () => {
         return request(app.getServer()).get(`${resourceRoute.path}/regionIcon.png?version=&locale=${locale}&region=${lorRegion}`).expect(400);
       });
     });
-    describe('[GET] /regionIcon.png?version=${version}&locale=&region=${lorRegion}', () => {
+    describe('[GET] /resource/regionIcon.png?version=${version}&locale=&region=${lorRegion}', () => {
       it('response statusCode 400', () => {
         const resourceRoute = new ResourceRoute();
         const app = new App([resourceRoute]);
@@ -108,12 +109,60 @@ describe('Testing regionIcon', () => {
         return request(app.getServer()).get(`${resourceRoute.path}/regionIcon.png?version=${version}&locale=&region=${lorRegion}`).expect(400);
       });
     });
-    describe('[GET] /regionIcon.png?version=${version}&locale=${locale}&region=', () => {
+    describe('[GET] /resource/regionIcon.png?version=${version}&locale=${locale}&region=', () => {
       it('response statusCode 400', () => {
         const resourceRoute = new ResourceRoute();
         const app = new App([resourceRoute]);
 
         return request(app.getServer()).get(`${resourceRoute.path}/regionIcon.png?version=${version}&locale=${locale}&region=`).expect(400);
+      });
+    });
+  });
+});
+
+describe('Testing card', () => {
+  describe('[GET] /resource/card?version=${version}&locale=${locale}&lorSet=${lorSet}&cardId=${cardId}', () => {
+    it('response statusCode 200', () => {
+      const resourceRoute = new ResourceRoute();
+      const app = new App([resourceRoute]);
+
+      return request(app.getServer())
+        .get(`${resourceRoute.path}/card?version=${version}&locale=${locale}&lorSet=${lorSet}&cardId=${cardId}`)
+        .expect(200);
+    });
+    describe('[GET] /resource/card?version=&locale=en_us&lorSet=1&cardId=01IO012', () => {
+      it('response statusCode 400', () => {
+        const resourceRoute = new ResourceRoute();
+        const app = new App([resourceRoute]);
+
+        return request(app.getServer()).get(`${resourceRoute.path}/card?version=&locale=${locale}&lorSet=${lorSet}&cardId=${cardId}`).expect(400);
+      });
+    });
+    describe('[GET] /resource/card?version=${version}&locale=&lorSet=${lorSet}&cardId=${cardId}', () => {
+      it('response statusCode 400', () => {
+        const resourceRoute = new ResourceRoute();
+        const app = new App([resourceRoute]);
+
+        return request(app.getServer()).get(`${resourceRoute.path}/card?version=${version}&locale=&lorSet=${lorSet}&cardId=${cardId}`).expect(400);
+      });
+    });
+    describe('[GET] /resource/card?version=${version}&locale=${locale}&lorSet=&cardId=${cardId}', () => {
+      it('response statusCode 500', () => {
+        const resourceRoute = new ResourceRoute();
+        const app = new App([resourceRoute]);
+
+        return request(app.getServer())
+          .get(`${resourceRoute.path}/card?version=${version}&locale=${locale}&lorSet=&cardId=${cardId}`)
+          .expect(500);
+      });
+    });
+
+    describe('[GET] /resource/card?version=${version}&locale=${locale}&lorSet=${lorSet}&cardId=', () => {
+      it('response statusCode 400', () => {
+        const resourceRoute = new ResourceRoute();
+        const app = new App([resourceRoute]);
+
+        return request(app.getServer()).get(`${resourceRoute.path}/card?version=${version}&locale=${locale}&lorSet=${lorSet}&cardId=`).expect(400);
       });
     });
   });

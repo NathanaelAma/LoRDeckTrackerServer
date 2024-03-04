@@ -16,6 +16,7 @@ class ResourceRoute implements Routes {
     this.router.get(`${this.path}/bundle`, this.resourceController.getBundle);
     this.router.get(`${this.path}/regionIcon.png`, this.resourceController.getRegionIcon);
     this.router.get(`${this.path}/set`, this.resourceController.getSetDetails);
+    this.router.get(`${this.path}/card`, this.resourceController.getCard);
   }
 }
 

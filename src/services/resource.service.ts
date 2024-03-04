@@ -36,8 +36,9 @@ class ResourceService {
     if (isEmpty(version)) throw new HttpException(400, 'version is empty');
     if (isEmpty(locale)) throw new HttpException(400, 'locale is empty');
     if (isEmpty(lorSet)) throw new HttpException(400, 'lorSet is empty');
+    if (isEmpty(cardId)) throw new HttpException(400, 'cardId is empty');
 
-    const card: Buffer = await galeforce.lor.ddragon.set.card.art.full().version(version).locale(locale).lorSet(lorSet).card(cardId).exec();
+    const card: Buffer = await galeforce.lor.ddragon.set.card.art.game().version(version).locale(locale).lorSet(lorSet).card(cardId).exec();
 
     return card;
   }

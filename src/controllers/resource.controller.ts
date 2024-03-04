@@ -53,6 +53,21 @@ class ResourceController {
       next(error);
     }
   };
+
+  public getCard = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const version: string = req.query.version.toString();
+      const locale: string = req.query.locale.toString();
+      const lorSet: number = parseInt(req.query.lorSet.toString());
+      const cardId: string = req.query.cardId.toString();
+
+      const data: Buffer = await this.resourceService.getCard(version, locale, lorSet, cardId);
+
+      res.status(200).contentType('image/png').send(Buffer.from(data));
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default ResourceController;
