@@ -21,7 +21,9 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
+test-report
 *.lcov
+junit.xml
 
 # nyc test coverage
 .nyc_output
@@ -128,5 +130,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
 firebase.json
 .idea/*
