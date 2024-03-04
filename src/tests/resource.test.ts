@@ -151,9 +151,7 @@ describe('Testing card', () => {
         const resourceRoute = new ResourceRoute();
         const app = new App([resourceRoute]);
 
-        return request(app.getServer())
-          .get(`${resourceRoute.path}/card?version=${version}&locale=${locale}&lorSet=&cardId=${cardId}`)
-          .expect(500);
+        return request(app.getServer()).get(`${resourceRoute.path}/card?version=${version}&locale=${locale}&lorSet=&cardId=${cardId}`).expect(500);
       });
     });
 
