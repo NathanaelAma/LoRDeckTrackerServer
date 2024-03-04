@@ -7,6 +7,7 @@ import MatchRoute from '@routes/match.route';
 import UsersRoute from '@routes/users.route';
 import StatusRoute from '@routes/status.route';
 import validateEnv from '@utils/validateEnv';
+import ResourceRoute from './routes/resource.route';
 
 validateEnv();
 
@@ -18,6 +19,7 @@ const app = new App([
   new MatchRoute(),
   new StatusRoute(),
   new LeaderboardRoute(),
+  new ResourceRoute(),
 ]);
 
 app.listen();
