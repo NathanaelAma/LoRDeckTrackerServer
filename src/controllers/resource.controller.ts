@@ -48,7 +48,7 @@ class ResourceController {
 
       const data: dto.LorDataDragonSetDataDTO[] = await this.resourceService.getSetDetails(version, locale, lorSet);
 
-      res.status(200).json({ data: data });
+      res.status(200).json({ data });
     } catch (error) {
       next(error);
     }
