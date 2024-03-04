@@ -113,9 +113,7 @@ describe('Testing regionIcon', () => {
         const resourceRoute = new ResourceRoute();
         const app = new App([resourceRoute]);
 
-        return request(app.getServer())
-          .get(`${resourceRoute.path}/regionIcon.png?version=${version}&locale=${locale}&region=`)
-          .expect(400);
+        return request(app.getServer()).get(`${resourceRoute.path}/regionIcon.png?version=${version}&locale=${locale}&region=`).expect(400);
       });
     });
   });
