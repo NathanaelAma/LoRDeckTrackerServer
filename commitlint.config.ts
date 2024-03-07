@@ -1,8 +1,4 @@
-import {
-	RuleConfigCondition,
-	RuleConfigSeverity,
-	TargetCaseType,
-} from '@commitlint/types';
+import { RuleConfigCondition, RuleConfigSeverity, TargetCaseType } from '@commitlint/types';
 
 const config = {
   rules: {
