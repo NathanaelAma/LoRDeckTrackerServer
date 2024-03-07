@@ -9,6 +9,7 @@
     "dev": "cross-env NODE_ENV=development nodemon",
     "build": "swc src -d dist --source-maps --copy-files",
     "build:tsc": "tsc && tsc-alias",
+    "commit": "commit",
     "test": "jest --forceExit --detectOpenHandles",
     "test:ci": "jest --ci --reporters=default --reporters=jest-junit --forceExit --detectOpenHandles --coverage=true --coverageReporters=cobertura",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
