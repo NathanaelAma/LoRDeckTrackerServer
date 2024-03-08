@@ -2,7 +2,6 @@ import { HttpException } from '@/exceptions/HttpException';
 import { isEmpty } from 'class-validator';
 import { dto } from 'galeforce';
 import galeforce from '@/utils/galeforce';
-import { LorDataDragonSetDataDTO } from 'galeforce/dist/galeforce/interfaces/dto';
 
 class ResourceService {
   public async getGlobals(version: string, locale: string): Promise<dto.LorDataDragonGlobalsDTO> {
