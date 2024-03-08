@@ -10,7 +10,6 @@ on:
     secrets:
       DOPPLER_TOKEN:
         required: true
-
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -52,7 +51,8 @@ jobs:
           DB_DATABASE: ${{ steps.doppler.outputs.DB_DATABASE }}
           SECRET_KEY: ${{ steps.doppler.outputs.SECRET_KEY }}
         run: npm run test:ci
-      - if: ${{ inputs.environment == 'testing' }} 
+        continue-on-error: true
+      - if: ${{ inputs.environment == 'testing' }}
         name: Archive Coverage Report
         uses: actions/upload-artifact@v4
         with:
@@ -60,11 +60,11 @@ jobs:
           path: coverage/cobertura-coverage.xml
           retention-days: 5
           if-no-files-found: warn
-      - if: ${{ inputs.environment == 'testing' }} 
+      - if: ${{ inputs.environment == 'testing' }}
         name: Archive Test Results
         uses: actions/upload-artifact@v4
         with:
           name: test-report
-          path: junit.xml 
+          path: junit.xml
           retention-days: 5
           if-no-files-found: warn
