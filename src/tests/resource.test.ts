@@ -1,4 +1,5 @@
 import request from 'supertest';
+import mongoose from "mongoose";
 import App from '@/app';
 import ResourceRoute from '@routes/resource.route';
 
@@ -164,4 +165,8 @@ describe('Testing card', () => {
       });
     });
   });
+});
+
+afterAll(() => {
+  mongoose.connection.close();
 });
