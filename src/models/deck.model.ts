@@ -8,20 +8,9 @@ const deckSchema: Schema = new Schema({
   },
   deckName: {
     type: String,
-    required: false,
+    required: true,
   },
-  cards: [
-    {
-      cardCode: {
-        type: String,
-        required: true,
-      },
-      count: {
-        type: Number,
-        required: true,
-      }
-    }
-  ],
+  encodedDeckString: String,
 });
 
 const deckModel = model<Deck & Document>('Deck', deckSchema);
