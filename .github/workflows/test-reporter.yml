@@ -1,34 +1,29 @@
 name: Test Reporter
-
 on:
   push:
-   branches:
-     - feature/*
-     - bugfix/*
-     - hotfix/*
-     - development
-
+    branches:
+      - feature/*
+      - bugfix/*
+      - hotfix/*
+      - development
 jobs:
   build:
     uses: ./.github/workflows/build.yml
     with:
       environment: testing
     secrets: inherit
-
   report-test:
     runs-on: ubuntu-latest
     name: Report Tests
     needs: build
     steps:
-    - name: Download test artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: test-report
-    - name: Test Report
-      uses: EnricoMi/publish-unit-test-result-action@v2
-      if: always()
-      with:
-        files: |
-          junit.xml
-
-
+      - name: Download test artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: test-report
+      - name: Test Report
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            junit.xml
