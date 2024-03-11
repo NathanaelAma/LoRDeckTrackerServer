@@ -1,5 +1,5 @@
 import request from 'supertest';
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 import App from '@/app';
 import ResourceRoute from '@routes/resource.route';
 
