@@ -12,7 +12,7 @@ const userData: CreateUserDto = {
   email: 'example@email.com',
   password: 'password',
 };
-const deckId = '65edb2421a4bb0aae9f8f1ea'
+const deckId = '65edb2421a4bb0aae9f8f1ea';
 
 describe('Testing Index', () => {
   describe('[GET] /', () => {
@@ -45,26 +45,23 @@ describe('Testing decks with auth', () => {
         const deckRoute = new DeckRoute();
         const app = new App([deckRoute]);
 
-        return request(app.getServer()).get(`${deckRoute.path}/all`).set("Authorization", `Bearer ${authToken}`).expect(200);
+        return request(app.getServer()).get(`${deckRoute.path}/all`).set('Authorization', `Bearer ${authToken}`).expect(200);
       });
     });
   });
   describe('Testing deckById', () => {
     describe('[GET] /deck/created/${deckId}', () => {
-it('response statusCode 200', async () => {
-
+      it('response statusCode 200', async () => {
         const deckRoute = new DeckRoute();
         const app = new App([deckRoute]);
 
-        return request(app.getServer()).get(`${deckRoute.path}/created/${deckId}`).set("Authorization", `Bearer ${authToken}`).expect(200);
-})
-    })
-  })
+        return request(app.getServer()).get(`${deckRoute.path}/created/${deckId}`).set('Authorization', `Bearer ${authToken}`).expect(200);
+      });
+    });
+  });
 });
 
-
 afterAll(async () => {
-
   mongoose.connection.close();
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
 });
