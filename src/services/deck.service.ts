@@ -28,7 +28,7 @@ class DeckService {
       deckName: deckName,
     });
     if (findDeck) throw new HttpException(409, `You already have a deck with name ${deckName}`);
-    const createdDeckData = this.decks.create({
+    const createdDeckData = await this.decks.create({
       userId: userData._id,
       deckName: deckName,
       encodedDeckString: deckData.encodedDeckString,

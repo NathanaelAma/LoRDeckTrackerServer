@@ -29,7 +29,6 @@ class DeckController {
   public createDeck = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     try {
       const deckData: CreateDeckDto = req.body;
-      console.log('createDeck');
       const deckName: string = req.query.name.toString();
       const userData: User = req.user;
       const createdDeckData: Deck = await this.deckService.createDeck(userData, deckName, deckData);
@@ -74,10 +73,8 @@ class DeckController {
   };
 
   public getDeckByName = async (req: RequestWithUser, res: Response, next: NextFunction) => {
-    console.log('req.params :>> ', req.query);
     try {
       const deckName: string = req.params.name;
-      console.log('deckName :>> ', deckName);
       const userData: User = req.user;
       const findDeck: Deck = await this.deckService.getDeckByName(userData, deckName);
       res.status(200).json({ data: findDeck, message: 'findOneByName' });

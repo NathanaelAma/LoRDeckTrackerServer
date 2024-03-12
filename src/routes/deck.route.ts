@@ -26,7 +26,7 @@ class DeckRoute implements Routes {
 
     this.router.delete(`${this.path}/delete`, authMiddleware, this.deckController.deleteDeck);
 
-    this.router.get(`${this.path}/created/:id`, authMiddleware, this.deckController.getDeckById);
+    this.router.get(`${this.path}/:id`, authMiddleware, this.deckController.getDeckById);
 
     //this.router.get(`${this.path}/:id/cards`, authMiddleware, this.deckController.getDeckCards);
   }
