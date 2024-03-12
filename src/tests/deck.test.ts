@@ -24,8 +24,8 @@ describe('Testing decks with auth', () => {
     email: 'example@email.com',
     password: 'password',
   };
-  let deckId: string = '65edb2491a4bb0aae9f8f1ee';
-  let encodedDeckString: string = 'CEBQGAIFAMJC6BABAMCBGFJUAICAGAQRAICACBIWDQOS4AIBAM4AEAIEAUIQEBADAEHV';
+  let deckId = '65edb2491a4bb0aae9f8f1ee';
+  let encodedDeckString = 'CEBQGAIFAMJC6BABAMCBGFJUAICAGAQRAICACBIWDQOS4AIBAM4AEAIEAUIQEBADAEHV';
   let deckName: string = (Math.random() + 1).toString(36).substring(7);
   const deckRoute = new DeckRoute();
   const app = new App([deckRoute]);
