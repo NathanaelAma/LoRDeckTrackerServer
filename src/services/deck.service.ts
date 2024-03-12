@@ -25,12 +25,12 @@ class DeckService {
   public async createDeck(userData: User, deckName: string, deckData: CreateDeckDto): Promise<Deck> {
     if (isEmpty(deckData)) throw new HttpException(400, 'deckData is empty');
     const findDeck: Deck = await this.decks.findOne({
-      deckName: deckName,
+      deckName,
     });
     if (findDeck) throw new HttpException(409, `You already have a deck with name ${deckName}`);
     const createdDeckData: Deck = await this.decks.create({
       userId: userData._id,
-      deckName: deckName,
+      deckName,
       encodedDeckString: deckData.encodedDeckString,
     });
 
@@ -65,13 +65,6 @@ class DeckService {
     return findDeck;
   }
 
-  public async getDeckByName(userData: User, deckName: string): Promise<Deck> {
-    if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
-    const findDeck: Deck = await this.decks.findOne({ deckName: deckName });
-    if (!findDeck) throw new HttpException(409, `You don't have a deck with this name ${deckName}`);
-
-    return findDeck;
-  }
 }
 
 export default DeckService;

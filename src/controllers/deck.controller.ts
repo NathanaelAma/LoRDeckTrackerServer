@@ -71,17 +71,6 @@ class DeckController {
       next(error); // skipcq
     }
   };
-
-  public getDeckByName = async (req: RequestWithUser, res: Response, next: NextFunction) => {
-    try {
-      const deckName: string = req.params.name;
-      const userData: User = req.user;
-      const findDeck: Deck = await this.deckService.getDeckByName(userData, deckName);
-      res.status(200).json({ data: findDeck, message: 'findOneByName' });
-    } catch (error) {
-      next(error); // skipcq
-    }
-  };
 }
 
 export default DeckController;
