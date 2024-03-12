@@ -22,13 +22,13 @@ class DeckService {
     return decks;
   }
 
-  public async createDeck(userData: User, deckName: string, deckData: CreateDeckDto): Promise<any> {
+  public async createDeck(userData: User, deckName: string, deckData: CreateDeckDto): Promise<Deck> {
     if (isEmpty(deckData)) throw new HttpException(400, 'deckData is empty');
     const findDeck: Deck = await this.decks.findOne({
       deckName: deckName,
     });
     if (findDeck) throw new HttpException(409, `You already have a deck with name ${deckName}`);
-    const createdDeckData = await this.decks.create({
+    const createdDeckData: Deck = await this.decks.create({
       userId: userData._id,
       deckName: deckName,
       encodedDeckString: deckData.encodedDeckString,

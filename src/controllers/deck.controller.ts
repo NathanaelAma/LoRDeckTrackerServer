@@ -46,7 +46,7 @@ class DeckController {
       const updatedDeckData: Deck = await this.deckService.updateDeck(userData, deckId, deckData);
       res.status(200).json({ data: updatedDeckData, message: 'updated' });
     } catch (error) {
-      next(error);
+      next(error); // skipcq
     }
   };
 
@@ -57,7 +57,7 @@ class DeckController {
       const deletedDeck: Deck = await this.deckService.deleteDeck(userData, deckId);
       res.status(200).json({ data: deletedDeck, message: 'deleted' });
     } catch (error) {
-      next(error);
+      next(error); // skipcq
     }
   };
 
@@ -68,7 +68,7 @@ class DeckController {
       const findDeck: Deck = await this.deckService.getDeckById(userData, deckId);
       res.status(200).json({ data: findDeck, message: 'findOneById' });
     } catch (error) {
-      next(error);
+      next(error); // skipcq
     }
   };
 
@@ -79,7 +79,7 @@ class DeckController {
       const findDeck: Deck = await this.deckService.getDeckByName(userData, deckName);
       res.status(200).json({ data: findDeck, message: 'findOneByName' });
     } catch (error) {
-      next(error);
+      next(error); // skipcq
     }
   };
 }

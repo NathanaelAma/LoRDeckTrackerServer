@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import App from '@/app';
 import DeckRoute from '@routes/deck.route';
 import { CreateUserDto } from '@dtos/users.dto';
-import UserModel from '@models/users.model';
 import AuthRoute from '@routes/auth.route';
 
 describe('Testing Index', () => {
@@ -24,9 +23,9 @@ describe('Testing decks with auth', () => {
     email: 'example@email.com',
     password: 'password',
   };
-  let deckId = '65edb2491a4bb0aae9f8f1ee';
-  let encodedDeckString = 'CEBQGAIFAMJC6BABAMCBGFJUAICAGAQRAICACBIWDQOS4AIBAM4AEAIEAUIQEBADAEHV';
-  let deckName: string = (Math.random() + 1).toString(36).substring(7);
+  const deckId = '65edb2491a4bb0aae9f8f1ee';
+  const encodedDeckString = 'CEBQGAIFAMJC6BABAMCBGFJUAICAGAQRAICACBIWDQOS4AIBAM4AEAIEAUIQEBADAEHV';
+  const deckName: string = (Math.random() + 1).toString(36).substring(7);
   const deckRoute = new DeckRoute();
   const app = new App([deckRoute]);
   const decks = deckRoute.deckController.deckService.decks;
@@ -38,18 +37,18 @@ describe('Testing decks with auth', () => {
       .send({
         ...userData,
       });
-    const cookieHeader: String = loginResponse.headers['set-cookie'].toString();
+    const cookieHeader: string = loginResponse.headers['set-cookie'].toString();
     const tokenRegex = /Authorization=([^;]+);/;
-    authToken = cookieHeader.match(tokenRegex)![1];
+    authToken = cookieHeader.match(tokenRegex)![1]; // needs to be non-null skipcq: JS-0339
+
+    (mongoose as mongoose.Mongoose).connect = jest.fn();
   });
   afterEach(async () => {
     await decks.deleteMany({});
   });
   describe('Testing getAllDecks', () => {
     describe('[GET] /deck/all', () => {
-      it('response statusCode 200', async () => {
-        const app = new App([deckRoute]);
-
+      it('response statusCode 200', () => {
         return request(app.getServer())
           .get(`${deckRoute.path}/all`)
           .set('Authorization', `Bearer ${authToken}`)
@@ -66,16 +65,13 @@ describe('Testing decks with auth', () => {
   });
   describe('Testing get deckById', () => {
     describe('[GET] /deck/${deckId}', () => {
+      decks.findOne = jest.fn().mockReturnValue({
+        _id: '65edb2491a4bb0aae9f8f1ee',
+        userId: '658f19b8ec8610ecab82495b',
+        deckName: 'testing',
+        encodedDeckString: 'CEBQGAIFAMJC6BABAMCBGFJUAICAGAQRAICACBIWDQOS4AIBAM4AEAIEAUIQEBADAEHV',
+      });
       it('response statusCode 200', () => {
-        decks.findOne = jest.fn().mockReturnValue({
-          _id: '65edb2491a4bb0aae9f8f1ee',
-          userId: '658f19b8ec8610ecab82495b',
-          deckName: 'testing',
-          encodedDeckString: 'CEBQGAIFAMJC6BABAMCBGFJUAICAGAQRAICACBIWDQOS4AIBAM4AEAIEAUIQEBADAEHV',
-        });
-        (mongoose as mongoose.Mongoose).connect = jest.fn();
-        const app = new App([deckRoute]);
-
         return request(app.getServer())
           .get(`${deckRoute.path}/${deckId}`)
           .set('Authorization', `Bearer ${authToken}`)
@@ -93,16 +89,13 @@ describe('Testing decks with auth', () => {
   });
   describe('Testing delete deckById', () => {
     describe('[DELETE] /deck/delete?id=${deckId}', () => {
+      decks.findByIdAndDelete = jest.fn().mockReturnValue({
+        _id: '65edb2491a4bb0aae9f8f1ee',
+        userId: '658f19b8ec8610ecab82495b',
+        deckName: 'testing4',
+        encodedDeckString: 'CEBQGAIFAMJC6BABAMCBGFJUAICAGAQRAICACBIWDQOS4AIBAM4AEAIEAUIQEBADAEHV',
+      });
       it('response status code 200', () => {
-        decks.findByIdAndDelete = jest.fn().mockReturnValue({
-          _id: '65edb2491a4bb0aae9f8f1ee',
-          userId: '658f19b8ec8610ecab82495b',
-          deckName: 'testing4',
-          encodedDeckString: 'CEBQGAIFAMJC6BABAMCBGFJUAICAGAQRAICACBIWDQOS4AIBAM4AEAIEAUIQEBADAEHV',
-        });
-        (mongoose as mongoose.Mongoose).connect = jest.fn();
-
-        const app = new App([deckRoute]);
         return request(app.getServer())
           .delete(`${deckRoute.path}/delete?id=${deckId}`)
           .set('Authorization', `Bearer ${authToken}`)
@@ -119,7 +112,7 @@ describe('Testing decks with auth', () => {
   });
   describe('Testing creating deck', () => {
     describe('[POST] /deck/new?name=${deckName}', () => {
-      it('response statusCode 201', async () => {
+      it('response statusCode 201', () => {
         decks.findOne = jest.fn();
         decks.create = jest.fn().mockReturnValue({
           _id: '65edb2491a4bb0aae9f8f1ee',
@@ -127,9 +120,6 @@ describe('Testing decks with auth', () => {
           deckName: 'test',
           encodedDeckString: 'CEBQGAIFAMJC6BABAMCBGFJUAICAGAQRAICACBIWDQOS4AIBAM4AEAIEAUIQEBADAEHV',
         });
-        (mongoose as mongoose.Mongoose).connect = jest.fn();
-
-        const app = new App([deckRoute]);
 
         return request(app.getServer())
           .post(`${deckRoute.path}/new?name=${deckName}`)
@@ -148,7 +138,7 @@ describe('Testing decks with auth', () => {
   });
   describe('Testing updating deck', () => {
     describe('[PATCH] /deck/update?id=${deckId}', () => {
-      it('response statusCode 200', async () => {
+      it('response statusCode 200', () => {
         decks.findOne = jest.fn().mockReturnValue({});
         decks.findByIdAndUpdate = jest.fn().mockReturnValue({
           _id: '65edb2491a4bb0aae9f8f1ee',
@@ -156,7 +146,6 @@ describe('Testing decks with auth', () => {
           deckName: 'test',
           encodedDeckString: 'CEBQGAIFAMJC6BABAMCBGFJUAICAGAQRAICACBIWDQOS4AIBAM4AEAIEAUIQEBADAEHV',
         });
-        (mongoose as mongoose.Mongoose).connect = jest.fn();
 
         return request(app.getServer())
           .patch(`${deckRoute.path}/update?id=${deckId}`)
