@@ -1,27 +1,23 @@
 name: release
-
 on:
   pull_request:
     branches: [main]
-
 jobs:
-   build:
+  build:
     uses: ./.github/workflows/build.yml
     with:
       environment: production
     secrets: inherit
-   create-release:
+  create-release:
     runs-on: ubuntu-latest
     environment: production
     needs: build
     steps:
-    - name: Create Sentry release
-      uses: getsentry/action-release@v1
-      env:
-        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-        SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-      with:
-        environment: production
-        sourcemaps: './src'
-
-
+      - name: Create Sentry release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+        with:
+          environment: production
+          sourcemaps: './src'
