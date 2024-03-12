@@ -149,7 +149,7 @@ describe('Testing decks with auth', () => {
   describe('Testing updating deck', () => {
     describe('[PATCH] /deck/update?id=${deckId}', () => {
       it('response statusCode 200', async () => {
-        decks.findOne = jest.fn().mockReturnValue({})
+        decks.findOne = jest.fn().mockReturnValue({});
         decks.findByIdAndUpdate = jest.fn().mockReturnValue({
           _id: '65edb2491a4bb0aae9f8f1ee',
           userId: '658f19b8ec8610ecab82495b',
@@ -160,7 +160,7 @@ describe('Testing decks with auth', () => {
 
         return request(app.getServer())
           .patch(`${deckRoute.path}/update?id=${deckId}`)
-          .send({encodedDeckString})
+          .send({ encodedDeckString })
           .set('Authorization', `Bearer ${authToken}`)
           .expect(200)
           .then(response => {
