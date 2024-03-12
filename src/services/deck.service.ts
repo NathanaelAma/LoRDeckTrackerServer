@@ -64,7 +64,6 @@ class DeckService {
 
     return findDeck;
   }
-
 }
 
 export default DeckService;
