@@ -12,7 +12,7 @@ class DeckController {
     try {
       await res.status(200).json({ data: 'Hello World', message: 'DeckController' });
     } catch (error) {
-      next(error);
+      next(error); // skipcq
     }
   };
 
@@ -22,7 +22,7 @@ class DeckController {
       const decks: Deck[] = await this.deckService.getAllDecks(userData);
       res.status(200).json({ data: decks, message: 'findAll' });
     } catch (error) {
-      next(error);
+      next(error); // skipcq
     }
   };
 
@@ -34,7 +34,7 @@ class DeckController {
       const createdDeckData: Deck = await this.deckService.createDeck(userData, deckName, deckData);
       res.status(201).json({ data: createdDeckData, message: 'created' });
     } catch (error) {
-      next(error);
+      next(error); // skipcq
     }
   };
 
