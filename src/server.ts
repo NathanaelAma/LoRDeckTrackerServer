@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import App from '@/app';
 import AuthRoute from '@routes/auth.route';
 import IndexRoute from '@routes/index.route';
@@ -8,6 +9,7 @@ import UsersRoute from '@routes/users.route';
 import StatusRoute from '@routes/status.route';
 import validateEnv from '@utils/validateEnv';
 import ResourceRoute from './routes/resource.route';
+import DeckRoute from './routes/deck.route';
 
 validateEnv();
 
@@ -20,6 +22,7 @@ const app = new App([
   new StatusRoute(),
   new LeaderboardRoute(),
   new ResourceRoute(),
+  new DeckRoute(),
 ]);
 
 app.listen();

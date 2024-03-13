@@ -2,7 +2,6 @@ import { HttpException } from '@/exceptions/HttpException';
 import { isEmpty } from 'class-validator';
 import { dto } from 'galeforce';
 import galeforce from '@/utils/galeforce';
-import { LorDataDragonSetDataDTO } from 'galeforce/dist/galeforce/interfaces/dto';
 
 class ResourceService {
   public async getGlobals(version: string, locale: string): Promise<dto.LorDataDragonGlobalsDTO> {
@@ -22,12 +21,12 @@ class ResourceService {
     return regionIcon;
   }
 
-  public async getSetDetails(version: string, locale: string, lorSet: number): Promise<LorDataDragonSetDataDTO[]> {
+  public async getSetDetails(version: string, locale: string, lorSet: number): Promise<dto.LorDataDragonSetDataDTO[]> {
     if (isEmpty(version)) throw new HttpException(400, 'version is empty');
     if (isEmpty(locale)) throw new HttpException(400, 'locale is empty');
     if (isEmpty(lorSet)) throw new HttpException(400, 'lorSet is empty');
 
-    const setData: LorDataDragonSetDataDTO[] = await galeforce.lor.ddragon.set.data().version(version).locale(locale).lorSet(lorSet).exec();
+    const setData: dto.LorDataDragonSetDataDTO[] = await galeforce.lor.ddragon.set.data().version(version).locale(locale).lorSet(lorSet).exec();
 
     return setData;
   }

@@ -133,3 +133,6 @@ dist
 
 firebase.json
 .idea/*
+
+# resource packages
+src/res
