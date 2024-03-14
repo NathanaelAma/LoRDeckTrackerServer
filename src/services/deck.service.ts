@@ -24,6 +24,7 @@ class DeckService {
 
   public async createDeck(userData: User, deckName: string, deckData: CreateDeckDto): Promise<Deck> {
     if (isEmpty(deckData)) throw new HttpException(400, 'deckData is empty');
+    if (isEmpty(deckName)) throw new HttpException(400, 'deckName is empty');
     const findDeck: Deck = await this.decks.findOne({
       deckName,
     });
@@ -39,6 +40,7 @@ class DeckService {
 
   public async updateDeck(userData: User, deckId: string, deckData: CreateDeckDto): Promise<Deck> {
     if (isEmpty(deckData)) throw new HttpException(400, 'deckData is empty');
+    if (isEmpty(deckId)) throw new HttpException(400, 'deckId is empty');
     const findDeck: Deck = await this.decks.findOne({ _id: deckId });
     if (!findDeck) throw new HttpException(409, `You don't have a deck with this id ${deckId}`);
     const updatedDeckData: Deck = await this.decks.findByIdAndUpdate(deckId, { encodedDeckString: deckData.encodedDeckString });
@@ -49,6 +51,7 @@ class DeckService {
 
   public async deleteDeck(userData: User, deckId: string): Promise<Deck> {
     if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
+    if (isEmpty(deckId)) throw new HttpException(400, 'deckId is empty');
     const findDeck: Deck = await this.decks.findOne({ _id: deckId });
     if (!findDeck) throw new HttpException(409, `You don't have a deck with this id ${deckId}`);
     const deletedDeck: Deck = await this.decks.findByIdAndDelete(deckId);

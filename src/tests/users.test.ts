@@ -9,11 +9,10 @@ afterAll(async () => {
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
 });
 
-afterEach(async () => {
-  await mongoose.disconnect();
-});
-
 describe('Testing Users', () => {
+  afterEach(async () => {
+    await mongoose.disconnect();
+  });
   describe('[GET] /users', () => {
     it('response fineAll Users', async () => {
       const usersRoute = new UsersRoute();
