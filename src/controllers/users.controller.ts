@@ -6,6 +6,10 @@ import userService from '@services/users.service';
 class UsersController {
   public userService = new userService();
 
+  /**
+   * Get all users.
+   * @route GET /users
+   */
   public getUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const findAllUsersData: User[] = await this.userService.findAllUser();
@@ -16,6 +20,11 @@ class UsersController {
     }
   };
 
+  /**
+   * Get a user by ID.
+   * @route GET /users/:id
+   * @param id - The ID of the user.
+   */
   public getUserById = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userId: string = req.params.id;
@@ -27,6 +36,11 @@ class UsersController {
     }
   };
 
+  /**
+   * Get a user by username.
+   * @route GET /users/username/:username
+   * @param username - The username of the user.
+   */
   public getUserByUserName = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userName: string = req.params.username;
@@ -38,6 +52,11 @@ class UsersController {
     }
   };
 
+  /**
+   * Create a new user.
+   * @route POST /users
+   * @param userData - The data of the user to be created.
+   */
   public createUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userData: CreateUserDto = req.body;
@@ -49,6 +68,12 @@ class UsersController {
     }
   };
 
+  /**
+   * Update a user.
+   * @route PUT /users/username/:username
+   * @param username - The username of the user to be updated.
+   * @param userData - The updated data of the user.
+   */
   public updateUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userName: string = req.params.username;
@@ -61,6 +86,11 @@ class UsersController {
     }
   };
 
+  /**
+   * Delete a user.
+   * @route DELETE /users/username/:username
+   * @param username - The username of the user to be deleted.
+   */
   public deleteUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userName: string = req.params.username;

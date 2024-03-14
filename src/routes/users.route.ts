@@ -4,6 +4,12 @@ import { CreateUserDto } from '@dtos/users.dto';
 import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@middlewares/validation.middleware';
 
+/**
+ * Represents the UsersRoute class that defines the routes for user-related operations.
+ * @class
+ * @implements {Routes}
+ */
+
 class UsersRoute implements Routes {
   public path = '/users';
   public router = Router();
@@ -13,6 +19,10 @@ class UsersRoute implements Routes {
     this.initializeRoutes();
   }
 
+  /**
+   * Initializes the routes for user-related operations.
+   * @private
+   */
   private initializeRoutes() {
     this.router.get(`${this.path}`, this.usersController.getUsers);
 
