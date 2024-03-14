@@ -5,6 +5,10 @@ import validationMiddleware from '@/middlewares/validation.middleware';
 import { CreateDeckDto } from '@/dtos/deck.dto';
 import authMiddleware from '@/middlewares/auth.middleware';
 
+/**
+ * Represents a route for managing decks.
+ * @implments {Routes}
+ */
 class DeckRoute implements Routes {
   public path = '/deck';
   public router = Router();
@@ -15,6 +19,9 @@ class DeckRoute implements Routes {
     this.initializeRoutes();
   }
 
+  /**
+   * Initializes the routes for the deck management.
+   */
   private initializeRoutes() {
     this.router.get(`${this.path}`, this.deckController.index);
 
