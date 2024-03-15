@@ -24,7 +24,7 @@ class UserService {
    * Retrieves a user by their ID.
    * @param userId - The ID of the user to retrieve.
    * @returns A promise that resolves to the user.
-   * @throws HttpException if the userId is empty or if the user doesn't exist.
+   * @throws {HttpException} if the userId is empty or if the user doesn't exist.
    */
   public async findUserById(userId: string): Promise<User> {
     if (isEmpty(userId)) throw new HttpException(400, 'UserId is empty');
@@ -39,7 +39,7 @@ class UserService {
    * Retrieves a user by their username.
    * @param userName - The username of the user to retrieve.
    * @returns A promise that resolves to the user.
-   * @throws HttpException if the userName is empty or if the user doesn't exist.
+   * @throws {HttpException} if the userName is empty or if the user doesn't exist.
    */
   public async findUserByUsername(userName: string): Promise<User> {
     if (isEmpty(userName)) throw new HttpException(400, 'UserName is empty');
@@ -54,7 +54,7 @@ class UserService {
    * Creates a new user.
    * @param userData - The data of the user to create.
    * @returns A promise that resolves to the created user.
-   * @throws HttpException if the userData is empty or if the email already exists.
+   * @throws {HttpException} if the userData is empty or if the email already exists.
    */
   public async createUser(userData: CreateUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
@@ -73,7 +73,7 @@ class UserService {
    * @param userName - The username of the user to update.
    * @param userData - The updated data of the user.
    * @returns A promise that resolves to the updated user.
-   * @throws HttpException if the userData is empty, if the email already exists and belongs to a different user, or if the user doesn't exist.
+   * @throws {HttpException} if the userData is empty, if the email already exists and belongs to a different user, or if the user doesn't exist.
    */
   public async updateUser(userName: string, userData: CreateUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');

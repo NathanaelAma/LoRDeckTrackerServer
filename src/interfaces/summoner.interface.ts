@@ -1,3 +1,6 @@
+/**
+ * Represents a summoner.
+ */
 export interface Summoner {
   _id: string;
   userId: string;
