@@ -10,6 +10,10 @@ afterAll(async () => {
 });
 
 describe('Testing Auth', () => {
+  const authRoute = new AuthRoute();
+  const app = new App([authRoute]);
+  (mongoose as mongoose.Mongoose).connect = jest.fn();
+
   describe('[POST] /signup', () => {
     it('response should have the Create userData', async () => {
       const userData: CreateUserDto = {
@@ -18,7 +22,6 @@ describe('Testing Auth', () => {
         password: 'q1w2e3r4!',
       };
 
-      const authRoute = new AuthRoute();
       const users = authRoute.authController.authService.users;
 
       users.findOne = jest.fn().mockReturnValue(null);
@@ -29,8 +32,6 @@ describe('Testing Auth', () => {
         password: await bcrypt.hash(userData.password, 10),
       });
 
-      (mongoose as mongoose.Mongoose).connect = jest.fn();
-      const app = new App([authRoute]);
       return request(app.getServer()).post(`${authRoute.path}signup`).send(userData);
     });
   });
@@ -43,7 +44,6 @@ describe('Testing Auth', () => {
         password: 'q1w2e3r4!',
       };
 
-      const authRoute = new AuthRoute();
       const users = authRoute.authController.authService.users;
 
       users.findOne = jest.fn().mockReturnValue({
@@ -53,15 +53,12 @@ describe('Testing Auth', () => {
         password: await bcrypt.hash(userData.password, 10),
       });
 
-      (mongoose as mongoose.Mongoose).connect = jest.fn();
-      const app = new App([authRoute]);
       return request(app.getServer())
         .post(`${authRoute.path}login`)
         .send(userData)
         .expect('Set-Cookie', /^Authorization=.+/);
     });
   });
-
   // describe('[POST] /logout', () => {
   //   it('logout Set-Cookie Authorization=; Max-age=0', async () => {
   //     const userData: User = {
