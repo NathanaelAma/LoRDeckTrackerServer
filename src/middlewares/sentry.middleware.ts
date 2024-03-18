@@ -3,6 +3,11 @@ import { NODE_ENV, SENTRY_DSN } from '@/config';
 import * as Sentry from '@sentry/node';
 import { BrowserTracing } from '@sentry/tracing';
 
+/**
+ * Initializes and configures the Sentry middleware for error tracking and performance monitoring.
+ * @param app - The instance of the App class.
+ */
+
 const sentryMiddleware = (app: App) => {
   Sentry.init({
     environment: `${NODE_ENV}`,
