@@ -14,7 +14,7 @@ import { HttpException } from '@exceptions/HttpException';
  * @returns A RequestHandler function that performs the validation and handles any validation errors.
  */
 const validationMiddleware = (
-  type: any,
+  type: any, // skipcq
   value: string | 'body' | 'query' | 'params' = 'body',
   skipMissingProperties = true,
   whitelist = true,
