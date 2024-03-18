@@ -6,6 +6,7 @@ import { CreateUserDto } from '@dtos/users.dto';
 import AuthRoute from '@routes/auth.route';
 
 afterAll(async () => {
+  mongoose.connection.close();
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
 });
 
