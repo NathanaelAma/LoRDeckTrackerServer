@@ -1,5 +1,4 @@
 import request from 'supertest';
-import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import App from '@/app';
 import IndexRoute from '@routes/index.route';
@@ -42,34 +41,49 @@ describe('Testing Index', () => {
       (mongoose as mongoose.Mongoose).connect = jest.fn();
     });
     describe('Testing Authorization', () => {
-      describe('No Authorization token', () => {
-        it('response statusCode 404', () => {
+      describe('Correct Authorization token', () => {
+        it('response statusCode 200', async () => {
           return request(app.getServer())
             .get(`${indexRoute.path}profile`)
-            .expect(404)
+            .set('Authorization', `Bearer ${authToken}`)
+            .expect(200)
             .then(response => {
               expect(response.body).toEqual(
                 expect.objectContaining({
-                  message: 'Authentication token missing',
+                  message: 'indexWithAuth',
                 }),
               );
             });
         });
       });
-      describe('Testing wrong Auth Token', () => {
-        it('response statusCode 401', () => {
-          return request(app.getServer())
-            .get(`${indexRoute.path}profile`)
-            .expect(401)
-            .set('Authorization', `Bearer ${(Math.random() + 1).toString(36).substring(7)}`)
-            .then(response => {
-              expect(response.body).toEqual(
-                expect.objectContaining({
-                  message: 'Wrong authentication token',
-                }),
-              );
-            });
-        });
+    });
+    describe('No Authorization token', () => {
+      it('response statusCode 404', async () => {
+        return request(app.getServer())
+          .get(`${indexRoute.path}profile`)
+          .expect(404)
+          .then(response => {
+            expect(response.body).toEqual(
+              expect.objectContaining({
+                message: 'Authentication token missing',
+              }),
+            );
+          });
+      });
+    });
+    describe('Testing wrong Auth Token', () => {
+      it('response statusCode 401', async () => {
+        return request(app.getServer())
+          .get(`${indexRoute.path}profile`)
+          .expect(401)
+          .set('Authorization', `Bearer ${(Math.random() + 1).toString(36).substring(7)}`)
+          .then(response => {
+            expect(response.body).toEqual(
+              expect.objectContaining({
+                message: 'Wrong authentication token',
+              }),
+            );
+          });
       });
     });
   });

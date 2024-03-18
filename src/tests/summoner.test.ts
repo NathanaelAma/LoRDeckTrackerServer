@@ -14,7 +14,6 @@ describe('Testing Summoner', () => {
 
   const summonerRoute = new SummonerRoute();
   const app = new App([summonerRoute]);
-  const summonerService = summonerRoute.summonerController.summonerService;
   describe('Get summoner by name', () => {
     describe('[GET] /?summonerName=${summonerName}&region=${region}', () => {
       it('response statusCode 200', () => {
