@@ -1,6 +1,16 @@
+/**
+ * Determines whether to use credentials or not.
+ */
 export const CREDENTIALS = process.env.CREDENTIALS === 'true';
+
+/**
+ * Environment variables.
+ */
 export const { NODE_ENV, PORT, DB_HOST, DB_DATABASE, SECRET_KEY, LOG_FORMAT, LOG_DIR, ORIGIN, SENTRY_DSN, RIOT_API_KEY } = process.env;
 
+/**
+ * Enum for League of Legends regions.
+ */
 export enum LeagueRegion {
   BRAZIL = 'br1',
   EUROPE_NORTHEAST = 'eun1',
@@ -14,6 +24,10 @@ export enum LeagueRegion {
   TURKEY = 'tr1',
   JAPAN = 'jp1',
 }
+
+/**
+ * Enum for Riot regions.
+ */
 export enum RiotRegion {
   AMERICAS = 'americas',
   ASIA = 'asia',
@@ -21,11 +35,19 @@ export enum RiotRegion {
   SEA = 'sea',
   ESPORTS = 'esports',
 }
+
+/**
+ * Enum for Legends of Runeterra regions.
+ */
 export enum LorRegion {
   AMERICAS = 'americas',
   EUROPE = 'europe',
   SOUTHEAST_ASIA = 'sea',
 }
+
+/**
+ * Enum for Valorant regions.
+ */
 export enum ValorantRegion {
   ASIA_PACIFIC = 'ap',
   BRAZIL = 'br',
@@ -36,6 +58,10 @@ export enum ValorantRegion {
   PBE = 'pbe1',
   ESPORTS = 'esports',
 }
+
+/**
+ * Enum for Data Dragon regions.
+ */
 export enum DataDragonRegion {
   BRAZIL = 'br',
   EUROPE_NORTHEAST = 'eune',
