@@ -5,9 +5,18 @@ import { CreateDeckDto } from '@/dtos/deck.dto';
 import { RequestWithUser } from '@/interfaces/auth.interface';
 import { User } from '@/interfaces/users.interface';
 
+/**
+ * Controller for managing decks.
+ */
 class DeckController {
   public deckService = new DeckService();
 
+  /**
+   * Get all decks.
+   * @param req - The request object.
+   * @param res - The response object.
+   * @param next - The next function.
+   */
   public index = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       await res.status(200).json({ data: 'Hello World', message: 'DeckController' });
@@ -16,6 +25,12 @@ class DeckController {
     }
   };
 
+  /**
+   * Get all decks for a specific user.
+   * @param req - The request object with user information.
+   * @param res - The response object.
+   * @param next - The next function.
+   */
   public getAllDecks = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     try {
       const userData: User = req.user;
@@ -26,6 +41,12 @@ class DeckController {
     }
   };
 
+  /**
+   * Create a new deck.
+   * @param req - The request object with user and deck data.
+   * @param res - The response object.
+   * @param next - The next function.
+   */
   public createDeck = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     try {
       const deckData: CreateDeckDto = req.body;
@@ -38,6 +59,12 @@ class DeckController {
     }
   };
 
+  /**
+   * Update a deck.
+   * @param req - The request object with user, deck ID, and updated deck data.
+   * @param res - The response object.
+   * @param next - The next function.
+   */
   public updateDeck = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     try {
       const deckId: string = req.query.id.toString();
@@ -50,6 +77,12 @@ class DeckController {
     }
   };
 
+  /**
+   * Delete a deck.
+   * @param req - The request object with user and deck ID.
+   * @param res - The response object.
+   * @param next - The next function.
+   */
   public deleteDeck = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     try {
       const deckId: string = req.query.id.toString();
@@ -61,6 +94,12 @@ class DeckController {
     }
   };
 
+  /**
+   * Get a deck by ID.
+   * @param req - The request object with user and deck ID.
+   * @param res - The response object.
+   * @param next - The next function.
+   */
   public getDeckById = async (req: RequestWithUser, res: Response, next: NextFunction) => {
     try {
       const deckId: string = req.params.id.toString();

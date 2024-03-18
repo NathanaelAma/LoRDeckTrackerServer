@@ -1,6 +1,9 @@
 import { model, Schema, Document } from 'mongoose';
 import { Deck } from '@interfaces/deck.interface';
 
+/**
+ * Represents the schema for a deck in the application.
+ */
 const deckSchema: Schema = new Schema({
   userId: {
     type: Object,

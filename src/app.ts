@@ -22,6 +22,9 @@ class App {
   public env: string;
   public port: string | number;
 
+  /**
+   * Represents the main application class.
+   */
   constructor(routes: Routes[]) {
     this.app = express();
     this.env = NODE_ENV ?? 'development';
@@ -35,6 +38,9 @@ class App {
     this.initializeErrorHandling();
   }
 
+  /**
+   * Starts the server and listens for incoming requests on the specified port.
+   */
   public listen() {
     this.app.listen(this.port, () => {
       logger.info('=================================');
@@ -44,10 +50,17 @@ class App {
     });
   }
 
+  /**
+   * Returns the server instance.
+   * @returns {Express.Application} The server instance.
+   */
   public getServer() {
     return this.app;
   }
 
+  /**
+   * Connects to the database using the specified connection URL and options.
+   */
   private connectToDatabase() {
     if (this.env !== 'production') {
       set('debug', true);
@@ -58,6 +71,9 @@ class App {
     connect(dbConnection.url, dbConnection.options as ConnectOptions);
   }
 
+  /**
+   * Initializes the middlewares for the Express application.
+   */
   private initializeMiddlewares() {
     if (this.env !== 'test') {
       this.app.use(morgan(LOG_FORMAT, { stream }));
@@ -72,12 +88,20 @@ class App {
     this.app.use(cookieParser());
   }
 
+  /**
+   * Initializes the routes by adding them to the Express app.
+   *
+   * @param routes - An array of route objects.
+   */
   private initializeRoutes(routes: Routes[]) {
     routes.forEach(route => {
       this.app.use('/', route.router);
     });
   }
 
+  /**
+   * Initializes Swagger documentation for the REST API.
+   */
   private initializeSwagger() {
     const options = {
       swaggerDefinition: {
@@ -94,10 +118,17 @@ class App {
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
   }
 
+  /**
+   * Initializes the error handling middleware for the application.
+   */
   private initializeErrorHandling() {
     this.app.use(errorMiddleware);
   }
 
+  /**
+   * Initializes the Sentry middleware and handlers.
+   * Sentry is only initialized if the environment is not 'test'.
+   */
   private initializeSentry() {
     if (this.env !== 'test') {
       sentryMiddleware(this);
