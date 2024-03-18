@@ -42,7 +42,7 @@ describe('Testing Index', () => {
     });
     describe('Testing Authorization', () => {
       describe('Correct Authorization token', () => {
-        it('response statusCode 200', async () => {
+        it('response statusCode 200', () => {
           return request(app.getServer())
             .get(`${indexRoute.path}profile`)
             .set('Authorization', `Bearer ${authToken}`)
@@ -58,7 +58,7 @@ describe('Testing Index', () => {
       });
     });
     describe('No Authorization token', () => {
-      it('response statusCode 404', async () => {
+      it('response statusCode 404', () => {
         return request(app.getServer())
           .get(`${indexRoute.path}profile`)
           .expect(404)
@@ -72,7 +72,7 @@ describe('Testing Index', () => {
       });
     });
     describe('Testing wrong Auth Token', () => {
-      it('response statusCode 401', async () => {
+      it('response statusCode 401', () => {
         return request(app.getServer())
           .get(`${indexRoute.path}profile`)
           .expect(401)
