@@ -1,8 +1,10 @@
 import request from 'supertest';
 import App from '@/app';
 import SummonerRoute from '@routes/summoner.route';
+import mongoose from 'mongoose';
 
 afterAll(async () => {
+  mongoose.connection.close();
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
 });
 
