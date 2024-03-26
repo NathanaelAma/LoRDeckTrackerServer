@@ -2,7 +2,7 @@ import request from 'supertest';
 import mongoose from 'mongoose';
 import App from '@/app';
 import DeckRoute from '@routes/deck.route';
-import { CreateUserDto } from '@dtos/users.dto';
+import { UserDto } from '@dtos/users.dto';
 import AuthRoute from '@routes/auth.route';
 
 describe('Testing Index', () => {
@@ -18,7 +18,7 @@ describe('Testing Index', () => {
 
 describe('Testing decks with auth', () => {
   let authToken: string;
-  const userData: CreateUserDto = {
+  const userData: UserDto = {
     username: 'example',
     email: 'example@email.com',
     password: 'password',
