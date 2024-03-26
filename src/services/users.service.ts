@@ -1,5 +1,5 @@
 import { hash } from 'bcrypt';
-import { CreateUserDto } from '@dtos/users.dto';
+import { CreateUserDto, UserDto, UpdateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
 import userModel from '@/models/users.model';
@@ -63,7 +63,11 @@ class UserService {
     if (findUser) throw new HttpException(409, `This email ${userData.email} already exists`);
 
     const hashedPassword = await hash(userData.password, 10);
-    const createUserData: User = await this.users.create({ ...userData, password: hashedPassword });
+    const createUserData: User = await this.users.create({
+      ...userData,
+      password: hashedPassword,
+      creation_date: new Date().toISOString(),
+    });
 
     return createUserData;
   }
@@ -75,7 +79,7 @@ class UserService {
    * @returns A promise that resolves to the updated user.
    * @throws {HttpException} if the userData is empty, if the email already exists and belongs to a different user, or if the user doesn't exist.
    */
-  public async updateUser(userName: string, userData: CreateUserDto): Promise<User> {
+  public async updateUser(userName: string, userData: UpdateUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
 
     if (userData.email) {
@@ -85,7 +89,11 @@ class UserService {
 
     if (userData.password) {
       const hashedPassword = await hash(userData.password, 10);
-      userData = { ...userData, password: hashedPassword };
+      userData = {
+        ...userData,
+        password: hashedPassword,
+        updated_at: new Date().toISOString(),
+      };
     }
 
     const updateUserByUserName: User = await this.users.findOneAndUpdate({ username: userName }, { userData });

@@ -1,6 +1,6 @@
-import { IsEmail, IsString, ValidateIf } from 'class-validator';
+import { IsDateString, IsEmail, IsString, ValidateIf } from 'class-validator';
 
-export class CreateUserDto {
+export class UserDto {
   @ValidateIf(o => !o.username)
   @IsString()
   public username: string;
@@ -10,4 +10,14 @@ export class CreateUserDto {
 
   @IsString()
   public password: string;
+}
+
+export class CreateUserDto extends UserDto {
+  @IsDateString()
+  public created_at?: string;
+}
+
+export class UpdateUserDto extends UserDto {
+  @IsDateString()
+  public updated_at?: string;
 }
