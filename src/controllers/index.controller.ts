@@ -18,6 +18,13 @@ class IndexController {
       next(error);
     }
   };
+  public indexWithAuth0 = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    try {
+      await res.status(200).json({ data: req.oidc.user, message: 'indexWithAuth0' });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default IndexController;

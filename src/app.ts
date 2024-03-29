@@ -16,6 +16,8 @@ import errorMiddleware from '@middlewares/error.middleware';
 import sentryMiddleware from '@/middlewares/sentry.middleware';
 import limiterMiddleware from '@/middlewares/ratelimit.middleware';
 import { logger, stream } from '@utils/logger';
+import {auth} from 'express-openid-connect';
+import { config } from '@auth';
 
 class App {
   public app: express.Application;
@@ -86,6 +88,7 @@ class App {
     this.app.use(limiterMiddleware);
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
+    this.app.use(auth(config))
   }
 
   /**
