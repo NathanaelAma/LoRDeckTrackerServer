@@ -7,9 +7,9 @@ import LeaderboardRoute from '@routes/leaderboard.route';
 import MatchRoute from '@routes/match.route';
 import UsersRoute from '@routes/users.route';
 import StatusRoute from '@routes/status.route';
-import validateEnv from '@utils/validateEnv';
 import ResourceRoute from './routes/resource.route';
 import DeckRoute from './routes/deck.route';
+import validateEnv from '@utils/validateEnv';
 
 validateEnv();
 

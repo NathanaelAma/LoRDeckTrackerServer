@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
+import AuthService from '@services/auth.service';
+import FirebaseAuthService from '@services/firebase-auth.service';
 import { UserDto } from '@dtos/users.dto';
 import { RequestWithUser } from '@interfaces/auth.interface';
 import { User } from '@interfaces/users.interface';
-import AuthService from '@services/auth.service';
 
 class AuthController {
-  public authService = new AuthService();
+  public authService = new FirebaseAuthService();
 
   public signUp = async (req: Request, res: Response, next: NextFunction) => {
     try {

@@ -3,6 +3,9 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
+import firebase, { initializeApp } from 'firebase/app';
+import firebaseAdmin from 'firebase-admin';
+import { Auth, getAuth } from 'firebase/auth';
 import hpp from 'hpp';
 import morgan from 'morgan';
 import { ConnectOptions, connect, set } from 'mongoose';
@@ -19,6 +22,9 @@ import { logger, stream } from '@utils/logger';
 
 class App {
   public app: express.Application;
+  public firebaseAdmin: firebaseAdmin.app.App;
+  public firebaseApp: firebase.FirebaseApp;
+  public firebaseAuth: Auth;
   public env: string;
   public port: string | number;
 
@@ -31,6 +37,7 @@ class App {
     this.port = PORT ?? 3000;
 
     this.connectToDatabase();
+    this.initializeFirebase();
     this.initializeSentry();
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
@@ -54,8 +61,15 @@ class App {
    * Returns the server instance.
    * @returns {Express.Application} The server instance.
    */
-  public getServer() {
+  public getServer(): Express.Application {
     return this.app;
+  }
+
+  /**
+   * getFirebaseApp
+   */
+  public getFirebaseApp(): firebase.FirebaseApp {
+    return this.firebaseApp;
   }
 
   /**
@@ -135,6 +149,27 @@ class App {
       this.app.use(Sentry.Handlers.requestHandler());
       this.app.use(Sentry.Handlers.tracingHandler());
     }
+  }
+
+  private initializeFirebase() {
+    if (this.env !== 'test') {
+      logger.info('Hello from Firebase App');
+    }
+    const firebaseConfig = {
+      apiKey: process.env.FIREBASE_API_KEY,
+      authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+      messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+      appId: process.env.FIREBASE_APP_ID,
+      measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+    };
+
+    this.firebaseApp = initializeApp(firebaseConfig);
+    //this.firebaseAdmin = firebaseAdmin.initializeApp();
+    logger.info(this.firebaseApp.name);
+
+    this.firebaseAuth = getAuth(this.firebaseApp);
   }
 }
 
