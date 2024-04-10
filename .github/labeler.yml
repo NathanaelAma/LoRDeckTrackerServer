@@ -15,3 +15,8 @@ bugfix:
 # Add 'release' label to any PR that is opened against the `main` branch
 release:
  - base-branch: 'main'
+
+# Add 'test' label to any PR that modifies test files
+test:
+ - changed-files:
+    - any-glob-to-any-file: [src/tests/**/*]
