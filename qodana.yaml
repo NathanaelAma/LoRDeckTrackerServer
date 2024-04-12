@@ -20,7 +20,7 @@ profile:
 #      - <path/where/not/run/inspection>
 
 #Execute shell command before Qodana execution (Applied in CI/CD pipeline)
-#bootstrap: sh ./prepare-qodana.sh
+bootstrap: npm ci
 
 #Install IDE plugins before Qodana execution (Applied in CI/CD pipeline)
 #plugins:
@@ -30,3 +30,6 @@ profile:
 linter: jetbrains/qodana-js:latest
 exclude:
   - name: HttpUrlsUsage
+include:
+  - name: Eslint
+  - name: CheckDependencyLicenses
