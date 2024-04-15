@@ -23,6 +23,9 @@ services:
       - ./:/app
       - /app/node_modules
     restart: 'unless-stopped'
+    init: true
+    environment:
+    - DOPPLER_TOKEN
     networks:
       - backend
     links:
