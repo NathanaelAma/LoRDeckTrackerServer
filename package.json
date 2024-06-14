@@ -10,6 +10,7 @@
     "build": "swc src -d dist --source-maps --copy-files",
     "build:tsc": "tsc && tsc-alias",
     "test": "jest --forceExit --detectOpenHandles",
+    "test:watch": "jest --forceExit --detectOpenHandles --watch",
     "test:ci": "jest --ci --reporters=default --reporters=jest-junit --forceExit --detectOpenHandles --coverage=true --coverageReporters=cobertura",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
