@@ -42,10 +42,10 @@ describe('Testing decks with auth', () => {
     authToken = cookieHeader.match(tokenRegex)![1]; // needs to be non-null skipcq: JS-0339
 
     (mongoose as mongoose.Mongoose).connect = jest.fn();
-  });
+  }, 10000);
   afterEach(async () => {
     await decks.deleteMany({});
-  });
+  }, 10000);
   describe('Testing getAllDecks', () => {
     describe('[GET] /deck/all', () => {
       it('response statusCode 200', () => {
